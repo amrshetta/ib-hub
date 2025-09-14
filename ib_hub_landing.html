@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IB HUB - Chemistry Courses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .logo-section {
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .logo svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        .platform-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #4fd1c7, #81ecec, #74b9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            letter-spacing: -2px;
+        }
+
+        .subject-title {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 3rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .course-card:hover::before {
+            left: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            border-color: rgba(79, 209, 199, 0.5);
+        }
+
+        .course-level {
+            font-size: 0.9rem;
+            color: #4fd1c7;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .course-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .course-description {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .course-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #4fd1c7, #81ecec);
+            color: #2d3436;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(79, 209, 199, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(79, 209, 199, 0.4);
+            background: linear-gradient(45deg, #81ecec, #4fd1c7);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            animation: floatRandom 20s infinite linear;
+        }
+
+        .footer-note {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes floatRandom {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .platform-title {
+                font-size: 2.5rem;
+            }
+            
+            .subject-title {
+                font-size: 1.4rem;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .course-card {
+                padding: 2rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-circle" style="width: 60px; height: 60px; left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-circle" style="width: 40px; height: 40px; left: 85%; animation-delay: 5s;"></div>
+        <div class="floating-circle" style="width: 80px; height: 80px; left: 70%; animation-delay: 10s;"></div>
+        <div class="floating-circle" style="width: 30px; height: 30px; left: 20%; animation-delay: 15s;"></div>
+    </div>
+
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo">
+                <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Origami Bird Design -->
+                    <defs>
+                        <linearGradient id="birdGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4fd1c7;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#81ecec;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="birdGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#74b9ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#6c5ce7;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="birdGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00cec9;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4fd1c7;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Main body -->
+                    <polygon points="100,180 200,80 300,140 250,200 200,160 150,200" fill="url(#birdGradient1)" />
+                    
+                    <!-- Wing -->
+                    <polygon points="200,80 320,60 300,140 200,160" fill="url(#birdGradient2)" />
+                    
+                    <!-- Tail -->
+                    <polygon points="100,180 150,200 120,280 80,240" fill="url(#birdGradient3)" />
+                    
+                    <!-- Head/Beak -->
+                    <polygon points="300,140 380,120 360,160 320,180" fill="url(#birdGradient1)" />
+                </svg>
+            </div>
+            <h1 class="platform-title">IB HUB</h1>
+            <h2 class="subject-title">IB Chemistry</h2>
+        </div>
+
+        <div class="courses-grid">
+            <div class="course-card" onclick="window.open('https://canvas.instructure.com/courses/12815104', '_blank')">
+                <div class="course-level">Diploma Programme Year 1</div>
+                <div class="course-name">DP1-SL</div>
+                <div class="course-description">
+                    Foundation concepts in chemistry with standard level depth. Perfect for building essential knowledge and skills.
+                </div>
+                <a href="https://canvas.instructure.com/courses/12815104" target="_blank" class="course-button">Start Learning</a>
+            </div>
+
+            <div class="course-card" onclick="window.open('https://canvas.instructure.com/courses/12815060', '_blank')">
+                <div class="course-level">Diploma Programme Year 2</div>
+                <div class="course-name">DP2-SL</div>
+                <div class="course-description">
+                    Advanced standard level chemistry preparing you for IB examinations with comprehensive review and practice.
+                </div>
+                <a href="https://canvas.instructure.com/courses/12815060" target="_blank" class="course-button">Start Learning</a>
+            </div>
+
+            <div class="course-card" onclick="window.open('https://canvas.instructure.com/courses/12815104', '_blank')">
+                <div class="course-level">Diploma Programme Year 1</div>
+                <div class="course-name">DP1-HL</div>
+                <div class="course-description">
+                    Intensive higher level chemistry with deeper theoretical understanding and complex problem-solving.
+                </div>
+                <a href="https://canvas.instructure.com/courses/12815104" target="_blank" class="course-button">Start Learning</a>
+            </div>
+
+            <div class="course-card" onclick="window.open('https://canvas.instructure.com/courses/12815109', '_blank')">
+                <div class="course-level">Diploma Programme Year 2</div>
+                <div class="course-name">DP2-HL</div>
+                <div class="course-description">
+                    Master-level chemistry course with advanced topics, research skills, and exam preparation strategies.
+                </div>
+                <a href="https://canvas.instructure.com/courses/12815109" target="_blank" class="course-button">Start Learning</a>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <p><strong>Ready to deploy on Netlify for free!</strong></p>
+            <p>Simply drag and drop this HTML file to <a href="https://app.netlify.com/drop" style="color: #4fd1c7;">Netlify Drop</a> or connect your GitHub repository for continuous deployment. Your IB Chemistry courses will be live instantly with HTTPS and global CDN.</p>
+        </div>
+    </div>
+</body>
+</html>
