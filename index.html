@@ -201,6 +201,27 @@
             transform: translateY(-2px);
         }
 
+        .logout-button {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(231, 76, 60, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.7rem 1.3rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            z-index: 1000;
+        }
+
+        .logout-button:hover {
+            background: rgba(231, 76, 60, 0.6);
+            transform: translateY(-2px);
+        }
+
         .lessons-content {
             background: var(--glass);
             backdrop-filter: blur(20px);
@@ -529,6 +550,7 @@
             .course-card { padding: 2rem 1.2rem; }
             .lessons-content { padding: 1.6rem; }
             .back-button { top: 1rem; left: 1rem; padding: 0.55rem 1rem; }
+            .logout-button { top: 1rem; right: 1rem; padding: 0.55rem 1rem; }
             .logo { width: 340px; height: 340px; }
             .course-logo { width: 280px; height: 280px; }
         }
@@ -563,6 +585,7 @@
     </section>
 
     <section aria-label="Home" class="page" id="main" role="region">
+        <button class="logout-button" onclick="logout()">Logout</button>
         <div class="container">
             <div class="logo-section">
                 <div aria-hidden="true" class="logo">
@@ -611,6 +634,7 @@
 
     <section aria-label="DP-SL" class="page course-page" id="dp-sl" role="region">
         <button aria-label="Back to Home" class="back-button" onclick="navigate('main')">← Back to Home</button>
+        <button class="logout-button" onclick="logout()">Logout</button>
         <div class="course-container">
             <div class="logo-section">
                 <div aria-hidden="true" class="course-logo">
@@ -681,6 +705,7 @@
 
     <section aria-label="DP-HL" class="page course-page" id="dp-hl" role="region">
         <button aria-label="Back to Home" class="back-button" onclick="navigate('main')">← Back to Home</button>
+        <button class="logout-button" onclick="logout()">Logout</button>
         <div class="course-container">
             <div class="logo-section">
                 <div aria-hidden="true" class="course-logo">
@@ -825,6 +850,12 @@
         
         // --- Global Navigation & Startup ---
         function navigate(pageId) { window.location.hash = pageId; }
+        
+        function logout() {
+            localStorage.removeItem(AUTH_KEY);
+            sessionStorage.removeItem(AUTH_KEY);
+            location.reload();
+        }
         
         window.addEventListener('load', () => {
             initializeApp();
