@@ -40,6 +40,7 @@
 
         a {
             color: inherit;
+            text-decoration: none;
         }
 
         .page {
@@ -340,25 +341,69 @@
             100% { transform: translateY(-100px) rotate(360deg); }
         }
 
-        .exam-center {
-            background: linear-gradient(135deg, #4fd1c7 0%, #00acc1 100%);
+        .button-row {
+            display: flex;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .large-link-btn {
+            flex: 1;
+            display: block;
             color: white;
             border-radius: 18px;
-            padding: 1.8rem 2rem;
-            margin: 2rem 0;
+            padding: 1.8rem 1rem;
             text-align: center;
             font-size: 1.3rem;
             font-weight: 800;
             letter-spacing: 1px;
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
-            animation: pulseBox 3s infinite;
-            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: 200% 200%;
+            animation: pan-gradient 10s ease infinite;
+        }
+        
+        .large-link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .large-link-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes pulseBox {
-            0% { transform: scale(1); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25); }
-            50% { transform: scale(1.03); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3); }
-            100% { transform: scale(1); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25); }
+        .large-link-btn:hover::before {
+            left: 100%;
+        }
+
+        .exam-center-btn {
+            background-image: linear-gradient(135deg, #74b9ff, #764ba2);
+        }
+
+        .data-booklet-btn {
+            background-image: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        .ia-checklist-btn {
+            background-image: linear-gradient(135deg, var(--accent-3), var(--accent-1));
+            margin-top: -0.5rem;
+            margin-bottom: 2.2rem;
+        }
+
+        @keyframes pan-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .signin-wrap {
@@ -553,6 +598,7 @@
             .logout-button { top: 1rem; right: 1rem; padding: 0.55rem 1rem; }
             .logo { width: 340px; height: 340px; }
             .course-logo { width: 280px; height: 280px; }
+            .button-row { flex-direction: column; }
         }
     </style>
 </head>
@@ -585,7 +631,7 @@
     </section>
 
     <section aria-label="Home" class="page" id="main" role="region">
-        <button class="logout-button" onclick="logout()">Logout</button>
+        <button class="logout-button" onclick="logout()">Sign out</button>
         <div class="container">
             <div class="logo-section">
                 <div aria-hidden="true" class="logo">
@@ -622,6 +668,7 @@
                     <div class="course-name">DP-HL</div>
                 </div>
             </div>
+            <a href="https://drive.google.com/file/d/1WwbuT_cI0pgXNIcDG49qwJT662uo43pv/view?usp=drive_link" class="large-link-btn ia-checklist-btn" target="_blank" rel="noopener">📝 Chemistry IA Checklist</a>
             <div aria-label="Instructor contact" class="contact-info">
                 <h3>Course Instructor</h3>
                 <div class="contact-details">
@@ -634,7 +681,7 @@
 
     <section aria-label="DP-SL" class="page course-page" id="dp-sl" role="region">
         <button aria-label="Back to Home" class="back-button" onclick="navigate('main')">← Back to Home</button>
-        <button class="logout-button" onclick="logout()">Logout</button>
+        <button class="logout-button" onclick="logout()">Sign out</button>
         <div class="course-container">
             <div class="logo-section">
                 <div aria-hidden="true" class="course-logo">
@@ -692,7 +739,10 @@
                 <div class="lesson-item"><span class="lesson-code">R3.3</span> - Electron pair sharing reactions (I)</div>
                 <div class="lesson-item"><span class="lesson-code">R3.4</span> - Electron pair sharing reactions (II)</div>
             </div>
-            <div class="exam-center">📘 Exam Center</div>
+            <div class="button-row">
+                <a href="https://drive.google.com/drive/folders/1YrF3booaghZPA5Taf_KXGOEPpb8kxgJj?usp=drive_link" class="large-link-btn exam-center-btn" target="_blank" rel="noopener">📘 Exam Center</a>
+                <a href="https://drive.google.com/file/d/1zb3nZFpQP7UoKCELHghkIZn3xEpvIqjS/view?usp=drive_link" class="large-link-btn data-booklet-btn" target="_blank" rel="noopener">🧪 Data Booklet</a>
+            </div>
             <div class="contact-info">
                 <h3>Course Instructor</h3>
                 <div class="contact-details">
@@ -705,7 +755,7 @@
 
     <section aria-label="DP-HL" class="page course-page" id="dp-hl" role="region">
         <button aria-label="Back to Home" class="back-button" onclick="navigate('main')">← Back to Home</button>
-        <button class="logout-button" onclick="logout()">Logout</button>
+        <button class="logout-button" onclick="logout()">Sign out</button>
         <div class="course-container">
             <div class="logo-section">
                 <div aria-hidden="true" class="course-logo">
@@ -773,7 +823,10 @@
                 <div class="lesson-item"><span class="lesson-code">R3.4</span> - Electron pair sharing reactions (II)</div>
                 <div class="lesson-item"><span class="lesson-code">R3.4</span> - HL level</div>
             </div>
-            <div class="exam-center">📘 Exam Center</div>
+            <div class="button-row">
+                <a href="https://drive.google.com/drive/folders/1v5b34PSv6dhTlTZLTVNlNHst0gW_RWCg?usp=drive_link" class="large-link-btn exam-center-btn" target="_blank" rel="noopener">📘 Exam Center</a>
+                <a href="https://drive.google.com/file/d/1zb3nZFpQP7UoKCELHghkIZn3xEpvIqjS/view?usp=drive_link" class="large-link-btn data-booklet-btn" target="_blank" rel="noopener">🧪 Data Booklet</a>
+            </div>
             <div class="contact-info">
                 <h3>Course Instructor</h3>
                 <div class="contact-details">
@@ -840,7 +893,6 @@
                 }
             });
 
-            // Clone logo into sign-in page
             const srcLogo = document.querySelector('.logo');
             const slot = document.getElementById('signin-logo-slot');
             if (srcLogo && slot) {
@@ -853,33 +905,68 @@
         
         function logout() {
             localStorage.removeItem(AUTH_KEY);
-            sessionStorage.removeItem(AUTH_KEY);
+            sessionStorage.removeItem(AUTH_KEY); // Also clear session storage for good measure
             location.reload();
         }
         
         window.addEventListener('load', () => {
             initializeApp();
             handleRouting();
+            attachDriveLinks();
         });
-        window.addEventListener('hashchange', handleRouting);
+        window.addEventListener('hashchange', () => {
+            handleRouting();
+            attachDriveLinks(); 
+        });
 
-        // --- Google Drive Linking (self-contained) ---
-        (function attachDriveLinks() {
+        // --- Google Drive Linking ---
+        function attachDriveLinks() {
             const DRIVE_LINKS = {
-                "S1.1": "https://drive.google.com/file/d/1klyPK0jU3sdwwOAMeBuOwbHU-TRTf4bV/view?usp=drive_link", "S1.2": "https://drive.google.com/file/d/18RI4s2nwqml8kTep-v5gAMhLcT7ol-UF/view?usp=drive_link", "S1.3": "https://drive.google.com/file/d/1rcoQaLktPgllaGKd03Bc0_7cDCx-uhgm/view?usp=drive_link", "S1.4 & R2.1": "https://drive.google.com/file/d/1QnLPr29Z3WLFglDGqzfubTLcpRcCh5CF/view?usp=drive_link", "S1.5": "https://drive.google.com/file/d/1Wsm2WGNjtOR0UrNawkYatRWk_NB2SEBa/view?usp=drive_link", "S1.1-HL": "https://drive.google.com/file/d/1klyPK0jU3sdwwOAMeBuOwbHU-TRTf4bV/view?usp=drive_link", "S1.2-HL": "https://drive.google.com/file/d/18RI4s2nwqml8kTep-v5gAMhLcT7ol-UF/view?usp=drive_link", "S1.3-HL": "https://drive.google.com/file/d/1rcoQaLktPgllaGKd03Bc0_7cDCx-uhgm/view?usp=drive_link", "S1.4 & R2.1-HL": "https://drive.google.com/file/d/1QnLPr29Z3WLFglDGqzfubTLcpRcCh5CF/view?usp=drive_link", "S1.5-HL": "https://drive.google.com/file/d/1Wsm2WGNjtOR0UrNawkYatRWk_NB2SEBa/view?usp=drive_link"
+                // DP-SL & DP-HL Core Links
+                "S1.1": "https://drive.google.com/file/d/13WuG72PBKj4JuGAfFFXz2M04hNmUthIL/view?usp=drive_link",
+                "S1.2": "https://drive.google.com/file/d/1WewTAu-Gm-3R8H4MrCj8SKVEcJjIpcoT/view?usp=drive_link",
+                "S1.3": "https://drive.google.com/file/d/1w0qzNi-uGk3sQ6-HV5xHbiiGlJTjMJ4D/view?usp=drive_link",
+                "S1.4 & R2.1": "https://drive.google.com/file/d/1ffNo31rsiz0rDAJYLJJYT_fxyFw56BL7/view?usp=drive_link",
+                "S1.5": "https://drive.google.com/file/d/1n3wEPhMZ0KowSAF-_O_p2XE8GY1g_FgS/view?usp=drive_link",
+                "S2.1": "https://drive.google.com/file/d/1DklJojJtLmF-GnM0xeiFTHTJDU2SumGi/view?usp=drive_link",
+                "S2.2": "https://drive.google.com/file/d/1ZAVmZjcCuBtqPHy8sd6ipZTLQDNeBHL8/view?usp=drive_link",
+                "S2.3": "https://drive.google.com/file/d/1cHPXVlKy4v0j-zUioXUzDYHkC1Mp30NT/view?usp=drive_link",
+                "S2.4": "https://drive.google.com/file/d/1T6oKjr4i76LhYTU5UiXWuiv2_vNFF-iB/view?usp=drive_link",
+                "S3.1": "https://drive.google.com/file/d/16_bGLO7WUpJVKbmwPYjtZzCdfaoqd1ha/view?usp=drive_link",
+                "S3.2": "https://drive.google.com/file/d/1FZdlOlFKOSIqGNSt8OCi7jXpWPu3IMdR/view?usp=drive_link",
+                "R1.1": "https://drive.google.com/file/d/1dt-AuNVCjNnc3BsT5bBfCrZ8tH1Hpdyu/view?usp=drive_link",
+                "R1.2": "https://drive.google.com/file/d/1Br2hIyg4Sq1ELo6SmtT78DJ2_e1KsFxM/view?usp=drive_link",
+                "R1.3": "https://drive.google.com/file/d/1UdDY4mlTx6GEctqeJDgKaa7W3ff8cy7u/view?usp=drive_link",
+                "R2.2": "https://drive.google.com/file/d/1MUuV8DrRvx4tMr_fJcPkSGagC3YInkF7/view?usp=drive_link",
+                "R2.3": "https://drive.google.com/file/d/13JMoXYEJJ6a-tCItgYplBi4CViRWcwU9/view?usp=drive_link",
+
+                // DP-HL Specific Links
+                "S1-HL": "https://drive.google.com/file/d/1NTg0GEsjLThWGerwCmVOYrOLD6m_McKh/view?usp=drive_link",
+                "S2-HL": "https://drive.google.com/file/d/1qMIKoMkYeEnQRgEc3UL9sU0fYwC5IoNm/view?usp=drive_link",
+                "S3.1-HL": "https://drive.google.com/file/d/1Bo7pq1ANx6uASE3XII4KEHgYmKc1PUJY/view?usp=drive_link",
+                "S3.2-HL": "https://drive.google.com/file/d/1Bo7pq1ANx6uASE3XII4KEHgYmKc1PUJY/view?usp=drive_link",
+                "R1.4-HL": "https://drive.google.com/file/d/1Dm_MfW6KcjgAZOBZWnqxfvagZnyhsN35/view?usp=drive_link",
+                "R2.2-HL": "https://drive.google.com/file/d/1mI-sAoR6FWFMaJQJ0NDD6_0gjT1Jn-_l/view?usp=drive_link",
+                "R2.3-HL": "https://drive.google.com/file/d/1IIAGmeFwiKYinoZl7X-yx4x3Mg5zb_WE/view?usp=drive_link"
             };
-            document.addEventListener('DOMContentLoaded', () => {
-                document.querySelectorAll('.lessons-content .lesson-item').forEach(item => {
-                    const codeEl = item.querySelector('.lesson-code');
-                    if (!codeEl) return;
-                    let key = codeEl.textContent.trim();
-                    const page = item.closest('.page');
-                    const isHL = page && page.id === 'dp-hl';
-                    if (/HL level/i.test(item.textContent) || (isHL && !DRIVE_LINKS[key])) {
-                        key = key.split(' ')[0] + "-HL";
-                    }
-                    const url = DRIVE_LINKS[key];
-                    if (!url) return;
+
+            document.querySelectorAll('.lessons-content .lesson-item').forEach(item => {
+                if (item.tagName === 'A') return; 
+                
+                const codeEl = item.querySelector('.lesson-code');
+                if (!codeEl) return;
+                
+                let key = codeEl.textContent.trim();
+                const page = item.closest('.page');
+                const isHL = page && page.id === 'dp-hl';
+
+                if (isHL && /HL level/i.test(item.textContent)) {
+                   key = key.split(' ')[0] + "-HL";
+                }
+                
+                const url = DRIVE_LINKS[key];
+                
+                if (url) {
                     const a = document.createElement('a');
                     a.href = url;
                     a.target = "_blank";
@@ -887,9 +974,9 @@
                     a.className = "lesson-item linked";
                     a.innerHTML = item.innerHTML;
                     item.replaceWith(a);
-                });
+                }
             });
-        })();
+        }
     </script>
 </body>
 </html>
