@@ -1,315 +1,2367 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IB HUB - Chemistry Courses</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+<html lang="en"><head><title>IB HUB - Chemistry (DP-SL &amp; DP-HL)</title><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="IB HUB | IB Chemistry by Dr. Amro Shetta — DP-SL and DP-HL course hub." name="description"/><meta and="" content="IB HUB | IB Chemistry by Dr. Amro Shetta â€" course="" dp-hl="" dp-sl="" hub."="" name="description"/><style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      /* Palette preserved from the user's code */
+      --bg-start: #667eea;
+      --bg-end: #764ba2;
+      --accent-1: #4fd1c7;
+      --accent-2: #81ecec;
+      --accent-3: #74b9ff;
+      --glass: rgba(255,255,255,0.1);
+      --glass-2: rgba(255,255,255,0.15);
+      --glass-border: rgba(255,255,255,0.2);
+      --glass-border-2: rgba(255,255,255,0.3);
+      --white-90: rgba(255,255,255,0.9);
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      color: white;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .page.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .course-page.active {
+      justify-content: flex-start;
+      padding-top: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .course-container {
+      max-width: 1000px;
+      width: 90%;
+      text-align: left;
+    }
+
+    .logo-section {
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease-out;
+      text-align: center;
+    }
+    .logo, .course-logo { width: 480px; height: 480px;
+      margin: 0 auto 1.25rem;
+      position: relative;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+    }
+    .course-logo { width: 360px; height: 360px; animation: none; }
+
+    .platform-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      letter-spacing: -1.5px;
+    }
+    .subject-title { font-size: 2.2rem; font-weight: 800; color: var(--white-90); margin-bottom: 2.6rem; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 3px 6px rgba(0,0,0,0.35);}
+    .course-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent-1);
+      margin-bottom: 1.2rem;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+      margin-top: 1rem;
+      margin-bottom: 2.2rem;
+    }
+    .course-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2.6rem 1.8rem;
+      border: 1px solid var(--glass-border);
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-align: center;
+    }
+    .course-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.55s ease;
+    }
+    .course-card:hover::before { left: 100%; }
+    .course-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      background: var(--glass-2);
+      box-shadow: 0 20px 44px rgba(0,0,0,0.28);
+      border-color: rgba(79,209,199,0.5);
+    }
+    .course-name {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 0.5px;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 1.5rem; left: 1.5rem;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border-2);
+      color: white;
+      padding: 0.7rem 1.3rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 700;
+      z-index: 1000;
+    }
+    .back-button:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+
+    .lessons-content {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2.2rem;
+      margin: 1.2rem 0 2rem 0;
+      border: 1px solid var(--glass-border);
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    .lessons-content::-webkit-scrollbar { width: 8px; }
+    .lessons-content::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.08); border-radius: 4px;
+    }
+    .lessons-content::-webkit-scrollbar-thumb {
+      background: rgba(79,209,199,0.5); border-radius: 4px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-1);
+      margin: 1.2rem 0 0.8rem 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .subsection-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #81ecec;
+      margin: 1.2rem 0 0.6rem 0;
+    }
+    .lesson-item {
+      color: var(--white-90);
+      margin: 0.35rem 0;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      line-height: 1.45;
+      font-size: 1rem;
+    }
+    .lesson-code {
+      color: var(--accent-1);
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+
+    .contact-info {
+      background: rgba(0,0,0,0.22);
+      border-radius: 15px;
+      padding: 1.6rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .contact-info h3 {
+      color: var(--accent-1);
+      margin-bottom: 0.6rem;
+      font-size: 1.15rem;
+    }
+    .contact-details {
+      color: var(--white-90);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .whatsapp-link {
+      color: var(--accent-1);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .whatsapp-link:hover { color: var(--accent-2); }
+
+    .floating-elements {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .floating-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      animation: floatRandom 20s infinite linear;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-16px); }
+    }
+    @keyframes floatRandom {
+      0%   { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100px) rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+  .platform-title { font-size: 2.3rem; }
+  .subject-title  { font-size: 1.6rem; font-weight: 800; }
+  .courses-grid   { grid-template-columns: 1fr; gap: 1.2rem; }
+  .course-card    { padding: 2rem 1.2rem; }
+  .lessons-content{ padding: 1.6rem; }
+  .back-button    { top: 1rem; left: 1rem; padding: 0.55rem 1rem; }
+  .logo { width: 340px; height: 340px; }        /* scaled for mobile */
+  .course-logo { width: 280px; height: 280px; } /* scaled for mobile */ /* scaled for mobile */
+}
+      .subject-title  { font-size: 1.6rem; font-weight: 800; }
+      .courses-grid   { grid-template-columns: 1fr; gap: 1.2rem; }
+      .course-card    { padding: 2rem 1.2rem; }
+      .lessons-content{ padding: 1.6rem; }
+      .back-button    { top: 1rem; left: 1rem; padding: 0.55rem 1rem; }
+    }
+  
+    .exam-center {
+      background: linear-gradient(135deg, #4fd1c7 0%, #00acc1 100%);
+      color: white;
+      border-radius: 18px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      animation: pulseBox 3s infinite;
+    }
+    @keyframes pulseBox {
+      0% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+      50% { transform: scale(1.03); box-shadow: 0 14px 34px rgba(0,0,0,0.3); }
+      100% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+    }
+
+
+    
+    .signin-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      max-width: 1400px;
+      align-items: center;
+      min-height: 90vh;
+    }
+    .signin-left { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+    .signin-right { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+
+    .signin-logo { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; max-width: 90%; }
+    .signin-logo svg { width: 50vh; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .signin-name {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+    .signin-name::after {
+      content: "";
+      display: block;
+      width: 140px;
+      height: 3px;
+      margin: 8px auto 0;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+      opacity: 0.9;
+    }
+
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+    @media (max-width: 900px) {
+      .signin-wrap { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .signin-logo svg { width: 40vh; }
+    }
+
+      .signin-logo { width: 90vw; max-width: 1000px; height: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+    }
+
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: 1rem;
+    }
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+
+    .signin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .signin-form label {
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .signin-form input {
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      font-size: 1rem;
+    }
+    .login-btn {
+      margin-top: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+
+    /* Sign-In form styles */
+    .signin-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .form-label { font-size: 0.95rem; font-weight: 700; opacity: 0.9; }
+    .form-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      color: #1a1a1a;
+      outline: none;
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+      font-weight: 600;
+    }
+    .form-input:focus {
+      border-color: rgba(79,209,199,0.8);
+      box-shadow: 0 0 0 3px rgba(79,209,199,0.25);
+    }
+    .primary-btn {
+      margin-top: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .primary-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,0.22); }
+    .primary-btn:active { transform: translateY(0); opacity: 0.95; }
+
+
+    /* Tweak sign-in layout to match the provided mock */
+    .signin-wrap { max-width: 1400px; }
+    .signin-left  { padding: 2rem 1rem; }
+    .signin-right { padding: 2rem 1rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; }
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--white-90);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+    /* Card width similar to mock */
+    .signin-card { max-width: 560px; width: 90%; }
+    /* Inputs spacing like mock */
+    .form-input { font-size: 1rem; }
+
+
+    /* Ensure two-column layout for sign-in page */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; height: 100%; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-align: center; }
+
+
+    /* CLEAN Sign-In layout */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; width: 100%; max-width: 1400px; min-height: 80vh; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .signin-card { width: 90%; max-width: 560px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(12px); box-shadow: 0 20px 44px rgba(0,0,0,0.25); }
+    @media (max-width: 900px) { .signin-wrap { grid-template-columns: 1fr; gap: 2rem; } .signin-logo svg { width: 40vh; } }
+
+
+    /* Drive-linked lesson styling (neutralized to preserve original appearance) */
+.lesson-item.linked { text-decoration: none; color: inherit; padding-left: 0; cursor: default; }
+.lesson-item.linked::before { content: none; }
+
+
+.lesson-item.linked { display: block; }
+
+/* Linked lessons: keep original look, but show a press (active) state */
+.lesson-item.linked {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer; /* subtle affordance */
+}
+
+
+
+
+/* Hover effect for linked lessons */
+.lesson-item.linked:hover {
+  background: rgba(79, 209, 199, 0.25);  /* light teal highlight */
+  box-shadow: inset 0 0 0 1px rgba(79,209,199,0.4);
+  text-decoration: none;
+  color: #4fd1c7;  /* teal text */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Click/active effect for linked lessons */
+.lesson-item.linked:active {
+  background: rgba(0, 150, 136, 0.35); /* darker teal on press */
+  color: #00acc1;
+  transform: scale(0.98);  /* subtle press-in */
+}
+
+</style><style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      /* Palette preserved from the user's code */
+      --bg-start: #667eea;
+      --bg-end: #764ba2;
+      --accent-1: #4fd1c7;
+      --accent-2: #81ecec;
+      --accent-3: #74b9ff;
+      --glass: rgba(255,255,255,0.1);
+      --glass-2: rgba(255,255,255,0.15);
+      --glass-border: rgba(255,255,255,0.2);
+      --glass-border-2: rgba(255,255,255,0.3);
+      --white-90: rgba(255,255,255,0.9);
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      color: white;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .page.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .course-page.active {
+      justify-content: flex-start;
+      padding-top: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .course-container {
+      max-width: 1000px;
+      width: 90%;
+      text-align: left;
+    }
+
+    .logo-section {
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease-out;
+      text-align: center;
+    }
+    .logo, .course-logo { width: 480px; height: 480px;
+      margin: 0 auto 1.25rem;
+      position: relative;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+    }
+    .course-logo { width: 360px; height: 360px; animation: none; }
+
+    /* FIXED: Add floating animation to signin logo */
+    .signin-logo svg {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .platform-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      letter-spacing: -1.5px;
+    }
+    .subject-title { font-size: 2.2rem; font-weight: 800; color: var(--white-90); margin-bottom: 2.6rem; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 3px 6px rgba(0,0,0,0.35);}
+    .course-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent-1);
+      margin-bottom: 1.2rem;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+      margin-top: 1rem;
+      margin-bottom: 2.2rem;
+    }
+    .course-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2.6rem 1.8rem;
+      border: 1px solid var(--glass-border);
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-align: center;
+    }
+    .course-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.55s ease;
+    }
+    .course-card:hover::before { left: 100%; }
+    .course-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      background: var(--glass-2);
+      box-shadow: 0 20px 44px rgba(0,0,0,0.28);
+      border-color: rgba(79,209,199,0.5);
+    }
+    .course-name {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 0.5px;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 1.5rem; left: 1.5rem;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border-2);
+      color: white;
+      padding: 0.7rem 1.3rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 700;
+      z-index: 1000;
+    }
+    .back-button:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+
+    .lessons-content {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2.2rem;
+      margin: 1.2rem 0 2rem 0;
+      border: 1px solid var(--glass-border);
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+    .lessons-content::-webkit-scrollbar { width: 8px; }
+    .lessons-content::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.08); border-radius: 4px;
+    }
+    .lessons-content::-webkit-scrollbar-thumb {
+      background: rgba(79,209,199,0.5); border-radius: 4px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-1);
+      margin: 1.2rem 0 0.8rem 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .subsection-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #81ecec;
+      margin: 1.2rem 0 0.6rem 0;
+    }
+    .lesson-item {
+      color: var(--white-90);
+      margin: 0.35rem 0;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      line-height: 1.45;
+      font-size: 1rem;
+    }
+    .lesson-code {
+      color: var(--accent-1);
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+
+    .contact-info {
+      background: rgba(0,0,0,0.22);
+      border-radius: 15px;
+      padding: 1.6rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .contact-info h3 {
+      color: var(--accent-1);
+      margin-bottom: 0.6rem;
+      font-size: 1.15rem;
+    }
+    .contact-details {
+      color: var(--white-90);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .whatsapp-link {
+      color: var(--accent-1);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .whatsapp-link:hover { color: var(--accent-2); }
+
+    .floating-elements {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .floating-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      animation: floatRandom 20s infinite linear;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-16px); }
+    }
+    @keyframes floatRandom {
+      0%   { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100px) rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .platform-title { font-size: 2.3rem; }
+      .subject-title  { font-size: 1.6rem; font-weight: 800; }
+      .courses-grid   { grid-template-columns: 1fr; gap: 1.2rem; }
+      .course-card    { padding: 2rem 1.2rem; }
+      .lessons-content{ padding: 1.6rem; }
+      .back-button    { top: 1rem; left: 1rem; padding: 0.55rem 1rem; }
+      .logo { width: 340px; height: 340px; }        /* scaled for mobile */
+      .course-logo { width: 280px; height: 280px; } /* scaled for mobile */
+      .signin-logo svg { width: 40vh; }
+    }
+      
+    .exam-center {
+      background: linear-gradient(135deg, #4fd1c7 0%, #00acc1 100%);
+      color: white;
+      border-radius: 18px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      animation: pulseBox 3s infinite;
+    }
+    @keyframes pulseBox {
+      0% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+      50% { transform: scale(1.03); box-shadow: 0 14px 34px rgba(0,0,0,0.3); }
+      100% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+    }
+
+    .signin-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      max-width: 1400px;
+      align-items: center;
+      min-height: 90vh;
+    }
+    .signin-left { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+    .signin-right { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+
+    .signin-logo { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; max-width: 90%; }
+    .signin-logo svg { width: 50vh; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .signin-name {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+    .signin-name::after {
+      content: "";
+      display: block;
+      width: 140px;
+      height: 3px;
+      margin: 8px auto 0;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+      opacity: 0.9;
+    }
+
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+    /* Sign-In form styles */
+    .signin-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .form-label { font-size: 0.95rem; font-weight: 700; opacity: 0.9; }
+    .form-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      color: #1a1a1a;
+      outline: none;
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+      font-weight: 600;
+    }
+    .form-input:focus {
+      border-color: rgba(79,209,199,0.8);
+      box-shadow: 0 0 0 3px rgba(79,209,199,0.25);
+    }
+    .primary-btn {
+      margin-top: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .primary-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,0.22); }
+    .primary-btn:active { transform: translateY(0); opacity: 0.95; }
+
+    /* CLEAN Sign-In layout */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; width: 100%; max-width: 1400px; min-height: 80vh; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .signin-card { width: 90%; max-width: 560px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(12px); box-shadow: 0 20px 44px rgba(0,0,0,0.25); }
+    @media (max-width: 900px) { .signin-wrap { grid-template-columns: 1fr; gap: 2rem; } .signin-logo svg { width: 40vh; } }
+
+    /* Drive-linked lesson styling (neutralized to preserve original appearance) */
+    .lesson-item.linked { text-decoration: none; color: inherit; padding-left: 0; cursor: default; }
+    .lesson-item.linked::before { content: none; }
+    .lesson-item.linked { display: block; }
+
+    /* Linked lessons: keep original look, but show a press (active) state */
+    .lesson-item.linked {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer; /* subtle affordance */
+    }
+
+    /* Hover effect for linked lessons */
+    .lesson-item.linked:hover {
+      background: rgba(79, 209, 199, 0.25);  /* light teal highlight */
+      box-shadow: inset 0 0 0 1px rgba(79,209,199,0.4);
+      text-decoration: none;
+      color: #4fd1c7;  /* teal text */
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    /* Click/active effect for linked lessons */
+    .lesson-item.linked:active {
+      background: rgba(0, 150, 136, 0.35); /* darker teal on press */
+      color: #00acc1;
+      transform: scale(0.98);  /* subtle press-in */
+    }
+
+  </style></head><body><section aria-label="Sign In" class="page active" id="signin" role="region">
+<div class="signin-wrap">
+<div class="signin-left">
+<div aria-hidden="true" class="signin-logo">
+<div id="signin-logo-slot">
+<svg id="Layer_1" style="enable-background:new 0 0 1080 1080;" version="1.1" viewbox="0 0 1080 1080" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+	.st0{fill:#00969A;}
+	.st1{fill:#A4C8CC;}
+	.st2{fill:#6AAEB2;}
+</style>
+<g>
+<polygon class="st0" points="507.07,506.54 528.87,589.76 421.86,659.8 	"></polygon>
+<polygon class="st1" points="720.31,372.75 487.67,550.2 704.74,322.26 	"></polygon>
+<polygon class="st1" points="715.48,276.26 788.04,383.58 669.61,369.12 	"></polygon>
+<polygon class="st0" points="697.92,357.23 447.16,588.73 482.08,355.17 	"></polygon>
+<polygon class="st1" points="715.48,276.26 697.92,357.23 482.08,355.17 	"></polygon>
+<polygon class="st2" points="697.92,357.23 492.65,142.92 482.08,355.17 	"></polygon>
+<polygon class="st0" points="492.65,142.92 291.96,152.94 482.08,355.17 	"></polygon>
+<polygon class="st2" points="482.08,355.17 498.91,573.31 421.86,659.8 	"></polygon>
+<polygon class="st1" points="715.48,276.26 705.25,362.25 693.65,371.32 684.17,370.17 697.92,357.23 	"></polygon>
+<g>
+<path class="st1" d="M387.56,931.82c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2V783.06c0-1.4,0.42-2.48,1.26-3.25
+			c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41V931.82z"></path>
+<path class="st1" d="M413.19,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.52,15.52,6.52,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.97,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.93,7.92,10.4,16.92,10.4,27C433.79,832.16,426.92,843.5,413.19,851.35 M406.68,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M406.68,927.2
+			c7.7-3.22,13.59-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+<path class="st0" d="M579.61,894.63h-10.72v37.19c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-32.99v37.19
+			c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-10.5c-1.4,0-2.49-0.42-3.26-1.26c-0.77-0.84-1.16-1.75-1.16-2.73
+			c0-2.8,1.47-4.2,4.41-4.2h10.5V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38
+			h32.99V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38h10.72
+			c2.8,0,4.2,1.4,4.2,4.2c0,0.98-0.39,1.89-1.16,2.73C581.88,894.21,580.87,894.63,579.61,894.63"></path>
+<path class="st0" d="M653.15,912.49c-1.26,1.12-3.26,3.02-5.99,5.67c-2.73,2.66-4.8,4.62-6.2,5.88v7.78c0,2.94-1.4,4.41-4.2,4.41
+			c-0.98,0-1.89-0.38-2.73-1.16c-0.84-0.77-1.26-1.85-1.26-3.25v-1.26c-5.47,3.78-10.72,5.67-15.76,5.67
+			c-6.86,0-12.71-2.45-17.54-7.36c-4.83-4.9-7.25-10.71-7.25-17.44V783.27c0-0.98,0.03-1.68,0.11-2.1c0.07-0.42,0.45-0.87,1.16-1.36
+			c0.7-0.49,1.68-0.74,2.94-0.74c1.82,0,2.94,0.35,3.36,1.05c0.42,0.7,0.63,1.75,0.63,3.15v128.17c0,4.62,1.64,8.55,4.94,11.77
+			c3.29,3.22,7.11,4.83,11.45,4.83c4.48,0,9.8-2.59,15.97-7.78v-137c0-1.4,0.42-2.49,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16
+			c2.8,0,4.2,1.47,4.2,4.41V912.7c0.56-0.42,1.44-1.26,2.63-2.52c1.19-1.26,2.06-2.13,2.63-2.63c0.56-0.49,1.29-1.01,2.21-1.58
+			c0.91-0.56,1.71-0.84,2.42-0.84c0.98,0,1.89,0.39,2.73,1.16c0.84,0.77,1.26,1.72,1.26,2.84
+			C654.83,910.26,654.27,911.37,653.15,912.49"></path>
+<path class="st0" d="M677.94,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.51,15.52,6.51,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.98,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.94,7.92,10.4,16.92,10.4,27C698.53,832.16,691.67,843.5,677.94,851.35 M671.43,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M671.43,927.2
+			c7.7-3.22,13.58-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+</g>
+</g>
+</svg>
+</div>
+<div class="signin-slogan">Unlock the World of Chemistry</div>
+<div class="signin-name">Dr. Amro Shetta</div>
+<div class="signin-whatsapp">WhatsApp: <a class="whatsapp-link" href="https://wa.me/201225051679" target="_blank">+201225051679</a></div>
+</div>
+</div>
+<div class="signin-right">
+<div aria-describedby="signin-desc" aria-labelledby="signin-title" class="signin-card" role="dialog">
+<h1 id="signin-title">Sign in to IB HUB Chemistry</h1>
+<p class="signin-desc" id="signin-desc">Enter your username and password to continue</p>
+<form class="signin-form" id="signinForm" novalidate="">
+<label class="form-label" for="username">Username</label>
+<input autocomplete="username" class="form-input" id="username" name="username" placeholder="your.email@example.com" required="" type="text"/>
+<label class="form-label" for="password">Password</label>
+<input autocomplete="current-password" class="form-input" id="password" name="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required="" type="password"/>
+<button aria-label="Sign in" class="primary-btn" id="pwSignIn" type="submit">Sign In</button>
+<div class="signin-note">Demo login â€" any nonâ€'empty credentials will sign you in.</div>
+</form>
+</div>
+</div>
+</div>
+</section><section aria-label="Sign In" class="page" id="signin" role="region">
+<div style="display:flex; width:100%; height:100vh;">
+<div style="flex:1; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05);">
+<div style="width:50%; max-width:500px;">
+<svg id="Layer_1" style="enable-background:new 0 0 1080 1080;" version="1.1" viewbox="0 0 1080 1080" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+	.st0{fill:#00969A;}
+	.st1{fill:#A4C8CC;}
+	.st2{fill:#6AAEB2;}
+
+    .exam-center {
+      background: linear-gradient(135deg, #4fd1c7 0%, #00acc1 100%);
+      color: white;
+      border-radius: 18px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      animation: pulseBox 3s infinite;
+    }
+    @keyframes pulseBox {
+      0% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+      50% { transform: scale(1.03); box-shadow: 0 14px 34px rgba(0,0,0,0.3); }
+      100% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+    }
+
+
+    
+    .signin-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      max-width: 1400px;
+      align-items: center;
+      min-height: 90vh;
+    }
+    .signin-left { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+    .signin-right { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+
+    .signin-logo { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; max-width: 90%; }
+    .signin-logo svg { width: 50vh; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .signin-name {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+    .signin-name::after {
+      content: "";
+      display: block;
+      width: 140px;
+      height: 3px;
+      margin: 8px auto 0;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+      opacity: 0.9;
+    }
+
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+    @media (max-width: 900px) {
+      .signin-wrap { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .signin-logo svg { width: 40vh; }
+    }
+
+      .signin-logo { width: 90vw; max-width: 1000px; height: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+    }
+
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: 1rem;
+    }
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+
+    .signin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .signin-form label {
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .signin-form input {
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      font-size: 1rem;
+    }
+    .login-btn {
+      margin-top: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+
+    /* Sign-In form styles */
+    .signin-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .form-label { font-size: 0.95rem; font-weight: 700; opacity: 0.9; }
+    .form-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      color: #1a1a1a;
+      outline: none;
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+      font-weight: 600;
+    }
+    .form-input:focus {
+      border-color: rgba(79,209,199,0.8);
+      box-shadow: 0 0 0 3px rgba(79,209,199,0.25);
+    }
+    .primary-btn {
+      margin-top: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .primary-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,0.22); }
+    .primary-btn:active { transform: translateY(0); opacity: 0.95; }
+
+
+    /* Tweak sign-in layout to match the provided mock */
+    .signin-wrap { max-width: 1400px; }
+    .signin-left  { padding: 2rem 1rem; }
+    .signin-right { padding: 2rem 1rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; }
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--white-90);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+    /* Card width similar to mock */
+    .signin-card { max-width: 560px; width: 90%; }
+    /* Inputs spacing like mock */
+    .form-input { font-size: 1rem; }
+
+
+    /* Ensure two-column layout for sign-in page */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; height: 100%; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-align: center; }
+
+
+    /* CLEAN Sign-In layout */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; width: 100%; max-width: 1400px; min-height: 80vh; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .signin-card { width: 90%; max-width: 560px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(12px); box-shadow: 0 20px 44px rgba(0,0,0,0.25); }
+    @media (max-width: 900px) { .signin-wrap { grid-template-columns: 1fr; gap: 2rem; } .signin-logo svg { width: 40vh; } }
+
+</style>
+<g>
+<polygon class="st0" points="507.07,506.54 528.87,589.76 421.86,659.8 	"></polygon>
+<polygon class="st1" points="720.31,372.75 487.67,550.2 704.74,322.26 	"></polygon>
+<polygon class="st1" points="715.48,276.26 788.04,383.58 669.61,369.12 	"></polygon>
+<polygon class="st0" points="697.92,357.23 447.16,588.73 482.08,355.17 	"></polygon>
+<polygon class="st1" points="715.48,276.26 697.92,357.23 482.08,355.17 	"></polygon>
+<polygon class="st2" points="697.92,357.23 492.65,142.92 482.08,355.17 	"></polygon>
+<polygon class="st0" points="492.65,142.92 291.96,152.94 482.08,355.17 	"></polygon>
+<polygon class="st2" points="482.08,355.17 498.91,573.31 421.86,659.8 	"></polygon>
+<polygon class="st1" points="715.48,276.26 705.25,362.25 693.65,371.32 684.17,370.17 697.92,357.23 	"></polygon>
+<g>
+<path class="st1" d="M387.56,931.82c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2V783.06c0-1.4,0.42-2.48,1.26-3.25
+			c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41V931.82z"></path>
+<path class="st1" d="M413.19,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.52,15.52,6.52,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.97,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.93,7.92,10.4,16.92,10.4,27C433.79,832.16,426.92,843.5,413.19,851.35 M406.68,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M406.68,927.2
+			c7.7-3.22,13.59-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+<path class="st0" d="M579.61,894.63h-10.72v37.19c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-32.99v37.19
+			c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-10.5c-1.4,0-2.49-0.42-3.26-1.26c-0.77-0.84-1.16-1.75-1.16-2.73
+			c0-2.8,1.47-4.2,4.41-4.2h10.5V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38
+			h32.99V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38h10.72
+			c2.8,0,4.2,1.4,4.2,4.2c0,0.98-0.39,1.89-1.16,2.73C581.88,894.21,580.87,894.63,579.61,894.63"></path>
+<path class="st0" d="M653.15,912.49c-1.26,1.12-3.26,3.02-5.99,5.67c-2.73,2.66-4.8,4.62-6.2,5.88v7.78c0,2.94-1.4,4.41-4.2,4.41
+			c-0.98,0-1.89-0.38-2.73-1.16c-0.84-0.77-1.26-1.85-1.26-3.25v-1.26c-5.47,3.78-10.72,5.67-15.76,5.67
+			c-6.86,0-12.71-2.45-17.54-7.36c-4.83-4.9-7.25-10.71-7.25-17.44V783.27c0-0.98,0.03-1.68,0.11-2.1c0.07-0.42,0.45-0.87,1.16-1.36
+			c0.7-0.49,1.68-0.74,2.94-0.74c1.82,0,2.94,0.35,3.36,1.05c0.42,0.7,0.63,1.75,0.63,3.15v128.17c0,4.62,1.64,8.55,4.94,11.77
+			c3.29,3.22,7.11,4.83,11.45,4.83c4.48,0,9.8-2.59,15.97-7.78v-137c0-1.4,0.42-2.49,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16
+			c2.8,0,4.2,1.47,4.2,4.41V912.7c0.56-0.42,1.44-1.26,2.63-2.52c1.19-1.26,2.06-2.13,2.63-2.63c0.56-0.49,1.29-1.01,2.21-1.58
+			c0.91-0.56,1.71-0.84,2.42-0.84c0.98,0,1.89,0.39,2.73,1.16c0.84,0.77,1.26,1.72,1.26,2.84
+			C654.83,910.26,654.27,911.37,653.15,912.49"></path>
+<path class="st0" d="M677.94,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.51,15.52,6.51,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.98,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.94,7.92,10.4,16.92,10.4,27C698.53,832.16,691.67,843.5,677.94,851.35 M671.43,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M671.43,927.2
+			c7.7-3.22,13.58-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+</g>
+</g>
+</svg>
+</div>
+</div>
+<div style="flex:1; display:flex; align-items:center; justify-content:center;">
+<div style="background:rgba(255,255,255,0.1); padding:3rem; border-radius:20px; text-align:center; max-width:400px; width:80%;">
+<h2 style="margin-bottom:2rem; font-size:1.8rem; font-weight:800; color:#4fd1c7;">Sign in to IB HUB Chemistry</h2>
+<button onclick="fakeLogin()" style="display:flex; align-items:center; justify-content:center; gap:0.8rem; background:white; color:#444; border:none; border-radius:8px; padding:0.8rem 1.5rem; font-size:1rem; font-weight:600; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+<img alt="Google Logo" src="https://www.svgrepo.com/show/355037/google.svg" style="width:20px; height:20px;"/> 
+            Sign in with Google
+          </button>
+</div>
+</div>
+</div>
+</section><section aria-label="Home" class="page" id="main" role="region">
+<div class="container">
+<div class="logo-section">
+<div aria-hidden="true" class="logo">
+<?xml version="1.0" encoding="utf-8"?>
+<svg id="Layer_1" style="enable-background:new 0 0 1080 1080;" version="1.1" viewbox="0 0 1080 1080" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+	.st0{fill:#00969A;}
+	.st1{fill:#A4C8CC;}
+	.st2{fill:#6AAEB2;}
+
+    .exam-center {
+      background: linear-gradient(135deg, #4fd1c7 0%, #00acc1 100%);
+      color: white;
+      border-radius: 18px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      animation: pulseBox 3s infinite;
+    }
+    @keyframes pulseBox {
+      0% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+      50% { transform: scale(1.03); box-shadow: 0 14px 34px rgba(0,0,0,0.3); }
+      100% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+    }
+
+
+    
+    .signin-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      max-width: 1400px;
+      align-items: center;
+      min-height: 90vh;
+    }
+    .signin-left { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+    .signin-right { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+
+    .signin-logo { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; max-width: 90%; }
+    .signin-logo svg { width: 50vh; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .signin-name {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+    .signin-name::after {
+      content: "";
+      display: block;
+      width: 140px;
+      height: 3px;
+      margin: 8px auto 0;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+      opacity: 0.9;
+    }
+
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+    @media (max-width: 900px) {
+      .signin-wrap { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .signin-logo svg { width: 40vh; }
+    }
+
+      .signin-logo { width: 90vw; max-width: 1000px; height: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+    }
+
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: 1rem;
+    }
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+
+    .signin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .signin-form label {
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .signin-form input {
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      font-size: 1rem;
+    }
+    .login-btn {
+      margin-top: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+
+    /* Sign-In form styles */
+    .signin-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .form-label { font-size: 0.95rem; font-weight: 700; opacity: 0.9; }
+    .form-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      color: #1a1a1a;
+      outline: none;
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+      font-weight: 600;
+    }
+    .form-input:focus {
+      border-color: rgba(79,209,199,0.8);
+      box-shadow: 0 0 0 3px rgba(79,209,199,0.25);
+    }
+    .primary-btn {
+      margin-top: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .primary-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,0.22); }
+    .primary-btn:active { transform: translateY(0); opacity: 0.95; }
+
+
+    /* Tweak sign-in layout to match the provided mock */
+    .signin-wrap { max-width: 1400px; }
+    .signin-left  { padding: 2rem 1rem; }
+    .signin-right { padding: 2rem 1rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; }
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--white-90);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+    /* Card width similar to mock */
+    .signin-card { max-width: 560px; width: 90%; }
+    /* Inputs spacing like mock */
+    .form-input { font-size: 1rem; }
+
+
+    /* Ensure two-column layout for sign-in page */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; height: 100%; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-align: center; }
+
+
+    /* CLEAN Sign-In layout */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; width: 100%; max-width: 1400px; min-height: 80vh; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .signin-card { width: 90%; max-width: 560px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(12px); box-shadow: 0 20px 44px rgba(0,0,0,0.25); }
+    @media (max-width: 900px) { .signin-wrap { grid-template-columns: 1fr; gap: 2rem; } .signin-logo svg { width: 40vh; } }
+
+</style>
+<g>
+<polygon class="st0" points="507.07,506.54 528.87,589.76 421.86,659.8 	"></polygon>
+<polygon class="st1" points="720.31,372.75 487.67,550.2 704.74,322.26 	"></polygon>
+<polygon class="st1" points="715.48,276.26 788.04,383.58 669.61,369.12 	"></polygon>
+<polygon class="st0" points="697.92,357.23 447.16,588.73 482.08,355.17 	"></polygon>
+<polygon class="st1" points="715.48,276.26 697.92,357.23 482.08,355.17 	"></polygon>
+<polygon class="st2" points="697.92,357.23 492.65,142.92 482.08,355.17 	"></polygon>
+<polygon class="st0" points="492.65,142.92 291.96,152.94 482.08,355.17 	"></polygon>
+<polygon class="st2" points="482.08,355.17 498.91,573.31 421.86,659.8 	"></polygon>
+<polygon class="st1" points="715.48,276.26 705.25,362.25 693.65,371.32 684.17,370.17 697.92,357.23 	"></polygon>
+<g>
+<path class="st1" d="M387.56,931.82c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2V783.06c0-1.4,0.42-2.48,1.26-3.25
+			c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41V931.82z"></path>
+<path class="st1" d="M413.19,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.52,15.52,6.52,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.97,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.93,7.92,10.4,16.92,10.4,27C433.79,832.16,426.92,843.5,413.19,851.35 M406.68,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M406.68,927.2
+			c7.7-3.22,13.59-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+<path class="st0" d="M579.61,894.63h-10.72v37.19c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-32.99v37.19
+			c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-10.5c-1.4,0-2.49-0.42-3.26-1.26c-0.77-0.84-1.16-1.75-1.16-2.73
+			c0-2.8,1.47-4.2,4.41-4.2h10.5V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38
+			h32.99V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38h10.72
+			c2.8,0,4.2,1.4,4.2,4.2c0,0.98-0.39,1.89-1.16,2.73C581.88,894.21,580.87,894.63,579.61,894.63"></path>
+<path class="st0" d="M653.15,912.49c-1.26,1.12-3.26,3.02-5.99,5.67c-2.73,2.66-4.8,4.62-6.2,5.88v7.78c0,2.94-1.4,4.41-4.2,4.41
+			c-0.98,0-1.89-0.38-2.73-1.16c-0.84-0.77-1.26-1.85-1.26-3.25v-1.26c-5.47,3.78-10.72,5.67-15.76,5.67
+			c-6.86,0-12.71-2.45-17.54-7.36c-4.83-4.9-7.25-10.71-7.25-17.44V783.27c0-0.98,0.03-1.68,0.11-2.1c0.07-0.42,0.45-0.87,1.16-1.36
+			c0.7-0.49,1.68-0.74,2.94-0.74c1.82,0,2.94,0.35,3.36,1.05c0.42,0.7,0.63,1.75,0.63,3.15v128.17c0,4.62,1.64,8.55,4.94,11.77
+			c3.29,3.22,7.11,4.83,11.45,4.83c4.48,0,9.8-2.59,15.97-7.78v-137c0-1.4,0.42-2.49,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16
+			c2.8,0,4.2,1.47,4.2,4.41V912.7c0.56-0.42,1.44-1.26,2.63-2.52c1.19-1.26,2.06-2.13,2.63-2.63c0.56-0.49,1.29-1.01,2.21-1.58
+			c0.91-0.56,1.71-0.84,2.42-0.84c0.98,0,1.89,0.39,2.73,1.16c0.84,0.77,1.26,1.72,1.26,2.84
+			C654.83,910.26,654.27,911.37,653.15,912.49"></path>
+<path class="st0" d="M677.94,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.51,15.52,6.51,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.98,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.94,7.92,10.4,16.92,10.4,27C698.53,832.16,691.67,843.5,677.94,851.35 M671.43,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M671.43,927.2
+			c7.7-3.22,13.58-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+</g>
+</g>
+</svg>
+</div>
+<h2 class="subject-title">IB Chemistry</h2>
+</div>
+<div aria-label="Courses" class="courses-grid" role="navigation">
+<div aria-label="Open DP-SL" class="course-card" onclick="navigate('dp-sl')" role="link" tabindex="0">
+<div class="course-name">DP-SL</div>
+</div>
+<div aria-label="Open DP-HL" class="course-card" onclick="navigate('dp-hl')" role="link" tabindex="0">
+<div class="course-name">DP-HL</div>
+</div>
+</div>
+<div aria-label="Instructor contact" class="contact-info">
+<h3>Course Instructor</h3>
+<div class="contact-details">
+<div>Dr. Amro Shetta</div>
+<div>WhatsApp: <a class="whatsapp-link" href="https://wa.me/201225051679" rel="noopener" target="_blank">+201225051679</a></div>
+</div>
+</div>
+</div>
+</section><section aria-label="DP-SL" class="page course-page" id="dp-sl" role="region">
+<button aria-label="Back to Home" class="back-button" onclick="navigate('main')">← Back to Home</button>
+<div class="course-container">
+<div class="logo-section">
+<div aria-hidden="true" class="course-logo">
+<?xml version="1.0" encoding="utf-8"?>
+<svg id="Layer_1" style="enable-background:new 0 0 1080 1080;" version="1.1" viewbox="0 0 1080 1080" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+	.st0{fill:#00969A;}
+	.st1{fill:#A4C8CC;}
+	.st2{fill:#6AAEB2;}
+
+    .exam-center {
+      background: linear-gradient(135deg, #4fd1c7 0%, #00acc1 100%);
+      color: white;
+      border-radius: 18px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      animation: pulseBox 3s infinite;
+    }
+    @keyframes pulseBox {
+      0% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+      50% { transform: scale(1.03); box-shadow: 0 14px 34px rgba(0,0,0,0.3); }
+      100% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+    }
+
+
+    
+    .signin-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      max-width: 1400px;
+      align-items: center;
+      min-height: 90vh;
+    }
+    .signin-left { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+    .signin-right { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+
+    .signin-logo { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; max-width: 90%; }
+    .signin-logo svg { width: 50vh; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .signin-name {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+    .signin-name::after {
+      content: "";
+      display: block;
+      width: 140px;
+      height: 3px;
+      margin: 8px auto 0;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+      opacity: 0.9;
+    }
+
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+    @media (max-width: 900px) {
+      .signin-wrap { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .signin-logo svg { width: 40vh; }
+    }
+
+      .signin-logo { width: 90vw; max-width: 1000px; height: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+    }
+
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: 1rem;
+    }
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+
+    .signin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .signin-form label {
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .signin-form input {
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      font-size: 1rem;
+    }
+    .login-btn {
+      margin-top: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+
+    /* Sign-In form styles */
+    .signin-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .form-label { font-size: 0.95rem; font-weight: 700; opacity: 0.9; }
+    .form-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      color: #1a1a1a;
+      outline: none;
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+      font-weight: 600;
+    }
+    .form-input:focus {
+      border-color: rgba(79,209,199,0.8);
+      box-shadow: 0 0 0 3px rgba(79,209,199,0.25);
+    }
+    .primary-btn {
+      margin-top: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .primary-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,0.22); }
+    .primary-btn:active { transform: translateY(0); opacity: 0.95; }
+
+
+    /* Tweak sign-in layout to match the provided mock */
+    .signin-wrap { max-width: 1400px; }
+    .signin-left  { padding: 2rem 1rem; }
+    .signin-right { padding: 2rem 1rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; }
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--white-90);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+    /* Card width similar to mock */
+    .signin-card { max-width: 560px; width: 90%; }
+    /* Inputs spacing like mock */
+    .form-input { font-size: 1rem; }
+
+
+    /* Ensure two-column layout for sign-in page */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; height: 100%; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-align: center; }
+
+
+    /* CLEAN Sign-In layout */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; width: 100%; max-width: 1400px; min-height: 80vh; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .signin-card { width: 90%; max-width: 560px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(12px); box-shadow: 0 20px 44px rgba(0,0,0,0.25); }
+    @media (max-width: 900px) { .signin-wrap { grid-template-columns: 1fr; gap: 2rem; } .signin-logo svg { width: 40vh; } }
+
+</style>
+<g>
+<polygon class="st0" points="507.07,506.54 528.87,589.76 421.86,659.8 	"></polygon>
+<polygon class="st1" points="720.31,372.75 487.67,550.2 704.74,322.26 	"></polygon>
+<polygon class="st1" points="715.48,276.26 788.04,383.58 669.61,369.12 	"></polygon>
+<polygon class="st0" points="697.92,357.23 447.16,588.73 482.08,355.17 	"></polygon>
+<polygon class="st1" points="715.48,276.26 697.92,357.23 482.08,355.17 	"></polygon>
+<polygon class="st2" points="697.92,357.23 492.65,142.92 482.08,355.17 	"></polygon>
+<polygon class="st0" points="492.65,142.92 291.96,152.94 482.08,355.17 	"></polygon>
+<polygon class="st2" points="482.08,355.17 498.91,573.31 421.86,659.8 	"></polygon>
+<polygon class="st1" points="715.48,276.26 705.25,362.25 693.65,371.32 684.17,370.17 697.92,357.23 	"></polygon>
+<g>
+<path class="st1" d="M387.56,931.82c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2V783.06c0-1.4,0.42-2.48,1.26-3.25
+			c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41V931.82z"></path>
+<path class="st1" d="M413.19,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.52,15.52,6.52,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.97,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.93,7.92,10.4,16.92,10.4,27C433.79,832.16,426.92,843.5,413.19,851.35 M406.68,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M406.68,927.2
+			c7.7-3.22,13.59-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+<path class="st0" d="M579.61,894.63h-10.72v37.19c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-32.99v37.19
+			c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-10.5c-1.4,0-2.49-0.42-3.26-1.26c-0.77-0.84-1.16-1.75-1.16-2.73
+			c0-2.8,1.47-4.2,4.41-4.2h10.5V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38
+			h32.99V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38h10.72
+			c2.8,0,4.2,1.4,4.2,4.2c0,0.98-0.39,1.89-1.16,2.73C581.88,894.21,580.87,894.63,579.61,894.63"></path>
+<path class="st0" d="M653.15,912.49c-1.26,1.12-3.26,3.02-5.99,5.67c-2.73,2.66-4.8,4.62-6.2,5.88v7.78c0,2.94-1.4,4.41-4.2,4.41
+			c-0.98,0-1.89-0.38-2.73-1.16c-0.84-0.77-1.26-1.85-1.26-3.25v-1.26c-5.47,3.78-10.72,5.67-15.76,5.67
+			c-6.86,0-12.71-2.45-17.54-7.36c-4.83-4.9-7.25-10.71-7.25-17.44V783.27c0-0.98,0.03-1.68,0.11-2.1c0.07-0.42,0.45-0.87,1.16-1.36
+			c0.7-0.49,1.68-0.74,2.94-0.74c1.82,0,2.94,0.35,3.36,1.05c0.42,0.7,0.63,1.75,0.63,3.15v128.17c0,4.62,1.64,8.55,4.94,11.77
+			c3.29,3.22,7.11,4.83,11.45,4.83c4.48,0,9.8-2.59,15.97-7.78v-137c0-1.4,0.42-2.49,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16
+			c2.8,0,4.2,1.47,4.2,4.41V912.7c0.56-0.42,1.44-1.26,2.63-2.52c1.19-1.26,2.06-2.13,2.63-2.63c0.56-0.49,1.29-1.01,2.21-1.58
+			c0.91-0.56,1.71-0.84,2.42-0.84c0.98,0,1.89,0.39,2.73,1.16c0.84,0.77,1.26,1.72,1.26,2.84
+			C654.83,910.26,654.27,911.37,653.15,912.49"></path>
+<path class="st0" d="M677.94,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.51,15.52,6.51,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.98,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.94,7.92,10.4,16.92,10.4,27C698.53,832.16,691.67,843.5,677.94,851.35 M671.43,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M671.43,927.2
+			c7.7-3.22,13.58-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+</g>
+</g>
+</svg>
+</div>
+<h1 class="course-title">DP-SL</h1>
+</div>
+<div class="lessons-content">
+<div class="section-title">STRUCTURE (S)</div>
+<div class="subsection-title">Structure 1 - Models of the particulate nature of matter</div>
+<div class="lesson-item"><span class="lesson-code">S1.1</span> - Introduction to the particulate nature of matter</div>
+<div class="lesson-item"><span class="lesson-code">S1.2</span> - The nuclear atom</div>
+<div class="lesson-item"><span class="lesson-code">S1.3</span> - Electron configurations</div>
+<div class="lesson-item"><span class="lesson-code">S1.4 &amp; R2.1</span> – Mole concept and the amount of chemical change</div>
+<div class="lesson-item"><span class="lesson-code">S1.5</span> - Ideal gases</div>
+<div class="subsection-title">Structure 2 - Models of bonding and structure</div>
+<div class="lesson-item"><span class="lesson-code">S2.1</span> - The ionic model</div>
+<div class="lesson-item"><span class="lesson-code">S2.2</span> - The covalent model</div>
+<div class="lesson-item"><span class="lesson-code">S2.3</span> - The metallic model</div>
+<div class="lesson-item"><span class="lesson-code">S2.4</span> - From models to materials</div>
+<div class="subsection-title">Structure 3 - Classification of matter</div>
+<div class="lesson-item"><span class="lesson-code">S3.1</span> - The periodic table: Classification of elements</div>
+<div class="lesson-item"><span class="lesson-code">S3.2</span> - Functional groups: Classification of organic compounds</div>
+<div class="section-title">REACTIVITY (R)</div>
+<div class="subsection-title">Reactivity 1 - What drives chemical reactions?</div>
+<div class="lesson-item"><span class="lesson-code">R1.1</span> - Measuring enthalpy changes</div>
+<div class="lesson-item"><span class="lesson-code">R1.2</span> - Energy cycles in reactions</div>
+<div class="lesson-item"><span class="lesson-code">R1.3</span> - Energy from fuels</div>
+<div class="subsection-title">Reactivity 2 - How much, how fast and how far?</div>
+<div class="lesson-item"><span class="lesson-code">R2.2</span> - How fast? The rate of chemical change</div>
+<div class="lesson-item"><span class="lesson-code">R2.3</span> - How far? The extent of chemical change</div>
+<div class="subsection-title">Reactivity 3 - What are the mechanisms of chemical change?</div>
+<div class="lesson-item"><span class="lesson-code">R3.1</span> - Proton transfer reactions</div>
+<div class="lesson-item"><span class="lesson-code">R3.2</span> - Electron transfer reactions</div>
+<div class="lesson-item"><span class="lesson-code">R3.3</span> - Electron pair sharing reactions (I)</div>
+<div class="lesson-item"><span class="lesson-code">R3.4</span> - Electron pair sharing reactions (II)</div>
+</div>
+<div class="exam-center">📘 Exam Center</div>
+<div class="contact-info">
+<h3>Course Instructor</h3>
+<div class="contact-details">
+<div>Dr. Amro Shetta</div>
+<div>WhatsApp: <a class="whatsapp-link" href="https://wa.me/201225051679" rel="noopener" target="_blank">+201225051679</a></div>
+</div>
+</div>
+</div>
+</section><section aria-label="DP-HL" class="page course-page" id="dp-hl" role="region">
+<button aria-label="Back to Home" class="back-button" onclick="navigate('main')">← Back to Home</button>
+<div class="course-container">
+<div class="logo-section">
+<div aria-hidden="true" class="course-logo">
+<?xml version="1.0" encoding="utf-8"?>
+<svg id="Layer_1" style="enable-background:new 0 0 1080 1080;" version="1.1" viewbox="0 0 1080 1080" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+	.st0{fill:#00969A;}
+	.st1{fill:#A4C8CC;}
+	.st2{fill:#6AAEB2;}
+
+    .exam-center {
+      background: linear-gradient(135deg, #4fd1c7 0%, #00acc1 100%);
+      color: white;
+      border-radius: 18px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      animation: pulseBox 3s infinite;
+    }
+    @keyframes pulseBox {
+      0% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+      50% { transform: scale(1.03); box-shadow: 0 14px 34px rgba(0,0,0,0.3); }
+      100% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+    }
+
+
+    
+    .signin-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      max-width: 1400px;
+      align-items: center;
+      min-height: 90vh;
+    }
+    .signin-left { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+    .signin-right { display: flex; justify-content: center; align-items: center; padding: 1rem; }
+
+    .signin-logo { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; max-width: 90%; }
+    .signin-logo svg { width: 50vh; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .signin-name {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+    .signin-name::after {
+      content: "";
+      display: block;
+      width: 140px;
+      height: 3px;
+      margin: 8px auto 0;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+      opacity: 0.9;
+    }
+
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+    @media (max-width: 900px) {
+      .signin-wrap { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .signin-logo svg { width: 40vh; }
+    }
+
+      .signin-logo { width: 90vw; max-width: 1000px; height: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+    }
+
+
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: 1rem;
+    }
+    .signin-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--white-90);
+    }
+    .signin-whatsapp a {
+      color: var(--accent-1);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .signin-whatsapp a:hover {
+      color: var(--accent-2);
+    }
+
+
+    .signin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .signin-form label {
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .signin-form input {
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      font-size: 1rem;
+    }
+    .login-btn {
+      margin-top: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+
+    /* Sign-In form styles */
+    .signin-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .form-label { font-size: 0.95rem; font-weight: 700; opacity: 0.9; }
+    .form-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.9);
+      color: #1a1a1a;
+      outline: none;
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+      font-weight: 600;
+    }
+    .form-input:focus {
+      border-color: rgba(79,209,199,0.8);
+      box-shadow: 0 0 0 3px rgba(79,209,199,0.25);
+    }
+    .primary-btn {
+      margin-top: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .primary-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,0.22); }
+    .primary-btn:active { transform: translateY(0); opacity: 0.95; }
+
+
+    /* Tweak sign-in layout to match the provided mock */
+    .signin-wrap { max-width: 1400px; }
+    .signin-left  { padding: 2rem 1rem; }
+    .signin-right { padding: 2rem 1rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; }
+    .signin-slogan {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--white-90);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+    /* Card width similar to mock */
+    .signin-card { max-width: 560px; width: 90%; }
+    /* Inputs spacing like mock */
+    .form-input { font-size: 1rem; }
+
+
+    /* Ensure two-column layout for sign-in page */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; height: 100%; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-align: center; }
+
+
+    /* CLEAN Sign-In layout */
+    .signin-wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; width: 100%; max-width: 1400px; min-height: 80vh; }
+    .signin-left, .signin-right { display: flex; justify-content: center; align-items: center; }
+    .signin-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
+    .signin-logo svg { width: 56vh; max-width: 560px; height: auto; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); }
+    .signin-slogan { font-size: 1.8rem; font-weight: 800; color: var(--white-90); text-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .signin-card { width: 90%; max-width: 560px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(12px); box-shadow: 0 20px 44px rgba(0,0,0,0.25); }
+    @media (max-width: 900px) { .signin-wrap { grid-template-columns: 1fr; gap: 2rem; } .signin-logo svg { width: 40vh; } }
+
+</style>
+<g>
+<polygon class="st0" points="507.07,506.54 528.87,589.76 421.86,659.8 	"></polygon>
+<polygon class="st1" points="720.31,372.75 487.67,550.2 704.74,322.26 	"></polygon>
+<polygon class="st1" points="715.48,276.26 788.04,383.58 669.61,369.12 	"></polygon>
+<polygon class="st0" points="697.92,357.23 447.16,588.73 482.08,355.17 	"></polygon>
+<polygon class="st1" points="715.48,276.26 697.92,357.23 482.08,355.17 	"></polygon>
+<polygon class="st2" points="697.92,357.23 492.65,142.92 482.08,355.17 	"></polygon>
+<polygon class="st0" points="492.65,142.92 291.96,152.94 482.08,355.17 	"></polygon>
+<polygon class="st2" points="482.08,355.17 498.91,573.31 421.86,659.8 	"></polygon>
+<polygon class="st1" points="715.48,276.26 705.25,362.25 693.65,371.32 684.17,370.17 697.92,357.23 	"></polygon>
+<g>
+<path class="st1" d="M387.56,931.82c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2V783.06c0-1.4,0.42-2.48,1.26-3.25
+			c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41V931.82z"></path>
+<path class="st1" d="M413.19,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.52,15.52,6.52,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.97,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.93,7.92,10.4,16.92,10.4,27C433.79,832.16,426.92,843.5,413.19,851.35 M406.68,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M406.68,927.2
+			c7.7-3.22,13.59-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+<path class="st0" d="M579.61,894.63h-10.72v37.19c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-32.99v37.19
+			c0,2.8-1.4,4.2-4.2,4.2c-2.66,0-3.99-1.4-3.99-4.2v-37.19h-10.5c-1.4,0-2.49-0.42-3.26-1.26c-0.77-0.84-1.16-1.75-1.16-2.73
+			c0-2.8,1.47-4.2,4.41-4.2h10.5V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38
+			h32.99V783.06c0-1.4,0.42-2.48,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16c2.8,0,4.2,1.47,4.2,4.41v103.38h10.72
+			c2.8,0,4.2,1.4,4.2,4.2c0,0.98-0.39,1.89-1.16,2.73C581.88,894.21,580.87,894.63,579.61,894.63"></path>
+<path class="st0" d="M653.15,912.49c-1.26,1.12-3.26,3.02-5.99,5.67c-2.73,2.66-4.8,4.62-6.2,5.88v7.78c0,2.94-1.4,4.41-4.2,4.41
+			c-0.98,0-1.89-0.38-2.73-1.16c-0.84-0.77-1.26-1.85-1.26-3.25v-1.26c-5.47,3.78-10.72,5.67-15.76,5.67
+			c-6.86,0-12.71-2.45-17.54-7.36c-4.83-4.9-7.25-10.71-7.25-17.44V783.27c0-0.98,0.03-1.68,0.11-2.1c0.07-0.42,0.45-0.87,1.16-1.36
+			c0.7-0.49,1.68-0.74,2.94-0.74c1.82,0,2.94,0.35,3.36,1.05c0.42,0.7,0.63,1.75,0.63,3.15v128.17c0,4.62,1.64,8.55,4.94,11.77
+			c3.29,3.22,7.11,4.83,11.45,4.83c4.48,0,9.8-2.59,15.97-7.78v-137c0-1.4,0.42-2.49,1.26-3.26c0.84-0.77,1.75-1.16,2.73-1.16
+			c2.8,0,4.2,1.47,4.2,4.41V912.7c0.56-0.42,1.44-1.26,2.63-2.52c1.19-1.26,2.06-2.13,2.63-2.63c0.56-0.49,1.29-1.01,2.21-1.58
+			c0.91-0.56,1.71-0.84,2.42-0.84c0.98,0,1.89,0.39,2.73,1.16c0.84,0.77,1.26,1.72,1.26,2.84
+			C654.83,910.26,654.27,911.37,653.15,912.49"></path>
+<path class="st0" d="M677.94,851.35c8.12,4.07,14.36,9.84,18.7,17.33c4.34,7.5,6.51,15.52,6.51,24.06
+			c0,11.77-3.78,21.85-11.35,30.26c-2.8,3.22-6.69,6.37-11.66,9.45c-4.98,3.08-9.21,4.62-12.71,4.62c-1.12,0-2.1-0.42-2.94-1.26
+			c-0.84-0.84-1.26-1.82-1.26-2.94V782.43c0-0.98,0.42-1.89,1.26-2.73c0.84-0.84,1.82-1.26,2.94-1.26c6.86,0,13.76,3.96,20.7,11.87
+			c6.94,7.92,10.4,16.92,10.4,27C698.53,832.16,691.67,843.5,677.94,851.35 M671.43,845.26c6.16-2.66,10.82-6.55,13.97-11.66
+			c3.15-5.11,4.73-10.61,4.73-16.49c0-6.02-1.65-11.69-4.94-17.02c-3.29-5.32-7.88-9.32-13.76-11.98V845.26z M671.43,927.2
+			c7.7-3.22,13.58-7.95,17.65-14.18c4.06-6.23,6.09-12.99,6.09-20.28c0-7.56-2.07-14.57-6.2-21.01
+			c-4.13-6.44-9.98-11.21-17.55-14.29V927.2z"></path>
+</g>
+</g>
+</svg>
+</div>
+<h1 class="course-title">DP-HL</h1>
+</div>
+<div class="lessons-content">
+<div class="section-title">STRUCTURE (S)</div>
+<div class="subsection-title">Structure 1 - Models of the particulate nature of matter</div>
+<div class="lesson-item"><span class="lesson-code">S1.1</span> - Introduction to the particulate nature of matter</div>
+<div class="lesson-item"><span class="lesson-code">S1.2</span> - The nuclear atom</div>
+<div class="lesson-item"><span class="lesson-code">S1.3</span> - Electron configurations</div>
+<div class="lesson-item"><span class="lesson-code">S1.4 &amp; R2.1</span> – Mole concept and the amount of chemical change</div>
+<div class="lesson-item"><span class="lesson-code">S1.5</span> - Ideal gases</div>
+<div class="lesson-item"><span class="lesson-code">S1</span> - HL level</div>
+<div class="subsection-title">Structure 2 - Models of bonding and structure</div>
+<div class="lesson-item"><span class="lesson-code">S2.1</span> - The ionic model</div>
+<div class="lesson-item"><span class="lesson-code">S2.2</span> - The covalent model</div>
+<div class="lesson-item"><span class="lesson-code">S2.3</span> - The metallic model</div>
+<div class="lesson-item"><span class="lesson-code">S2.4</span> - From models to materials</div>
+<div class="lesson-item"><span class="lesson-code">S2</span> - HL level</div>
+<div class="subsection-title">Structure 3 - Classification of matter</div>
+<div class="lesson-item"><span class="lesson-code">S3.1</span> - The periodic table: Classification of elements</div>
+<div class="lesson-item"><span class="lesson-code">S3.1</span> - HL level</div>
+<div class="lesson-item"><span class="lesson-code">S3.2</span> - Functional groups: Classification of organic compounds</div>
+<div class="lesson-item"><span class="lesson-code">S3.2</span> - HL level</div>
+<div class="section-title">REACTIVITY (R)</div>
+<div class="subsection-title">Reactivity 1 - What drives chemical reactions?</div>
+<div class="lesson-item"><span class="lesson-code">R1.1</span> - Measuring enthalpy changes</div>
+<div class="lesson-item"><span class="lesson-code">R1.2</span> - Energy cycles in reactions</div>
+<div class="lesson-item"><span class="lesson-code">R1.3</span> - Energy from fuels</div>
+<div class="lesson-item"><span class="lesson-code">R1.4</span> - HL level</div>
+<div class="subsection-title">Reactivity 2 - How much, how fast and how far?</div>
+<div class="lesson-item"><span class="lesson-code">R2.2</span> - How fast? The rate of chemical change</div>
+<div class="lesson-item"><span class="lesson-code">R2.2</span> - HL level</div>
+<div class="lesson-item"><span class="lesson-code">R2.3</span> - How far? The extent of chemical change</div>
+<div class="lesson-item"><span class="lesson-code">R2.3</span> - HL level</div>
+<div class="subsection-title">Reactivity 3 - What are the mechanisms of chemical change?</div>
+<div class="lesson-item"><span class="lesson-code">R3.1</span> - Proton transfer reactions</div>
+<div class="lesson-item"><span class="lesson-code">R3.1</span> - HL level</div>
+<div class="lesson-item"><span class="lesson-code">R3.2</span> - Electron transfer reactions</div>
+<div class="lesson-item"><span class="lesson-code">R3.2</span> - HL level</div>
+<div class="lesson-item"><span class="lesson-code">R3.3</span> - Electron pair sharing reactions (I)</div>
+<div class="lesson-item"><span class="lesson-code">R3.4</span> - Electron pair sharing reactions (II)</div>
+<div class="lesson-item"><span class="lesson-code">R3.4</span> - HL level</div>
+</div>
+<div class="exam-center">📘 Exam Center</div>
+<div class="contact-info">
+<h3>Course Instructor</h3>
+<div class="contact-details">
+<div>Dr. Amro Shetta</div>
+<div>WhatsApp: <a class="whatsapp-link" href="https://wa.me/201225051679" rel="noopener" target="_blank">+201225051679</a></div>
+</div>
+</div>
+</div>
+</section><script>
+
+    const AUTH_KEY = 'ibhub_auth';
+    function isSignedIn() { try { return localStorage.getItem(AUTH_KEY) === '1'; } catch(e){ return false; } }
+    function signInDemo() { try { localStorage.setItem(AUTH_KEY, '1'); } catch(e){} }
+    function signOutDemo() { try { localStorage.removeItem(AUTH_KEY); } catch(e){} }
+
+    function setActive(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const el = document.getElementById(pageId);
+      if (el) el.classList.add('active');
+    }
+    function navigate(pageId) {
+      const hash = pageId === 'signin' ? '#/signin' : (pageId === 'main' ? '#/' : '#/' + pageId);
+      if (location.hash !== hash) { location.hash = hash; }
+      setActive(pageId);
+    }
+    function handleRoute() {
+      const h = location.hash.replace('#/', '');
+      const authed = isSignedIn();
+      if (!authed) { setActive('signin'); return; }
+      if (!h || h === '' || h === 'main') return setActive('main');
+      if (['dp-sl','dp-hl'].includes(h)) return setActive(h);
+      setActive('main');
+    }
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('load', () => {
+      const srcLogo = document.querySelector('.logo');
+      const slot = document.getElementById('signin-logo-slot');
+      if (srcLogo && slot) slot.innerHTML = srcLogo.innerHTML; /* only logo svg is inside .logo; this clones the svg only */
+
+      const form = document.getElementById('signinForm');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          signInDemo();
+          navigate('main');
+          handleRoute();
+        });
+      }
+      handleRoute();
+    });
+
+
+    // ---- Google Drive linking ----
+    // Paste your actual Google Drive links below.
+    // Keys must match the text inside <span class="lesson-code">...</span>
+    // For HL-specific entries, use a suffix like "-HL" (e.g., "R2.2-HL")
+    const DRIVE_LINKS = {"S1.1": "https://drive.google.com/file/d/1klyPK0jU3sdwwOAMeBuOwbHU-TRTf4bV/view?usp=drive_link", "S1.2": "https://drive.google.com/file/d/18RI4s2nwqml8kTep-v5gAMhLcT7ol-UF/view?usp=drive_link", "S1.3": "https://drive.google.com/file/d/1rcoQaLktPgllaGKd03Bc0_7cDCx-uhgm/view?usp=drive_link", "S1.4 & R2.1": "https://drive.google.com/file/d/1QnLPr29Z3WLFglDGqzfubTLcpRcCh5CF/view?usp=drive_link", "S1.5": "https://drive.google.com/file/d/1Wsm2WGNjtOR0UrNawkYatRWk_NB2SEBa/view?usp=drive_link", "S1.1-HL": "https://drive.google.com/file/d/1klyPK0jU3sdwwOAMeBuOwbHU-TRTf4bV/view?usp=drive_link", "S1.2-HL": "https://drive.google.com/file/d/18RI4s2nwqml8kTep-v5gAMhLcT7ol-UF/view?usp=drive_link", "S1.3-HL": "https://drive.google.com/file/d/1rcoQaLktPgllaGKd03Bc0_7cDCx-uhgm/view?usp=drive_link", "S1.4 & R2.1-HL": "https://drive.google.com/file/d/1QnLPr29Z3WLFglDGqzfubTLcpRcCh5CF/view?usp=drive_link", "S1.5-HL": "https://drive.google.com/file/d/1Wsm2WGNjtOR0UrNawkYatRWk_NB2SEBa/view?usp=drive_link"};
+
+    // Convert lesson items into links when a mapping exists.
+    (function attachDriveLinks() {
+      document.querySelectorAll('.lessons-content .lesson-item').forEach(item => {
+        const codeEl = item.querySelector('.lesson-code');
+        if (!codeEl) return;
+        let key = codeEl.textContent.trim();
+
+        // Heuristic: if the text contains "HL level" or page is HL, consider HL suffix
+        const page = item.closest('.page');
+        const isHL = page && page.id === 'dp-hl';
+
+        // Some lines in HL are like "S1 - HL level". In that case use "S1-HL" key.
+        if (/HL level/i.test(item.textContent) || isHL && !DRIVE_LINKS[key]) {
+          key = key + "-HL";
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            overflow-x: hidden;
-        }
+        const url = DRIVE_LINKS[key];
+        if (!url || /REPLACE_/.test(url)) return; // skip placeholders
 
-        .container {
-            max-width: 900px;
-            width: 90%;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-        }
+        // Replace the item with an anchor while preserving inner HTML
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.className = "lesson-item linked";
+        a.innerHTML = item.innerHTML;
+        item.replaceWith(a);
+      });
+    })();
 
-        .logo-section {
-            margin-bottom: 3rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1.5rem;
-            position: relative;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .logo svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
-        }
-
-        .platform-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, #4fd1c7, #81ecec, #74b9ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            letter-spacing: -2px;
-        }
-
-        .subject-title {
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 3rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .course-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 2.5rem 1.5rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .course-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .course-card:hover::before {
-            left: 100%;
-        }
-
-        .course-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255,255,255,0.15);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            border-color: rgba(79, 209, 199, 0.5);
-        }
-
-        .course-level {
-            font-size: 0.9rem;
-            color: #4fd1c7;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .course-name {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .course-description {
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.8);
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .course-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, #4fd1c7, #81ecec);
-            color: #2d3436;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(79, 209, 199, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .course-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(79, 209, 199, 0.4);
-            background: linear-gradient(45deg, #81ecec, #4fd1c7);
-        }
-
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .floating-circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            animation: floatRandom 20s infinite linear;
-        }
-
-        .footer-note {
-            margin-top: 4rem;
-            padding: 2rem;
-            background: rgba(0,0,0,0.2);
-            border-radius: 15px;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.6;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes floatRandom {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-            .platform-title {
-                font-size: 2.5rem;
-            }
-            
-            .subject-title {
-                font-size: 1.4rem;
-            }
-            
-            .courses-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .course-card {
-                padding: 2rem 1.2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="floating-elements">
-        <div class="floating-circle" style="width: 60px; height: 60px; left: 10%; animation-delay: 0s;"></div>
-        <div class="floating-circle" style="width: 40px; height: 40px; left: 85%; animation-delay: 5s;"></div>
-        <div class="floating-circle" style="width: 80px; height: 80px; left: 70%; animation-delay: 10s;"></div>
-        <div class="floating-circle" style="width: 30px; height: 30px; left: 20%; animation-delay: 15s;"></div>
-    </div>
-
-    <div class="container">
-        <div class="logo-section">
-            <div class="logo">
-                <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Origami Bird Design -->
-                    <defs>
-                        <linearGradient id="birdGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#4fd1c7;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#81ecec;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="birdGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#74b9ff;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#6c5ce7;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="birdGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#00cec9;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#4fd1c7;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    
-                    <!-- Main body -->
-                    <polygon points="100,180 200,80 300,140 250,200 200,160 150,200" fill="url(#birdGradient1)" />
-                    
-                    <!-- Wing -->
-                    <polygon points="200,80 320,60 300,140 200,160" fill="url(#birdGradient2)" />
-                    
-                    <!-- Tail -->
-                    <polygon points="100,180 150,200 120,280 80,240" fill="url(#birdGradient3)" />
-                    
-                    <!-- Head/Beak -->
-                    <polygon points="300,140 380,120 360,160 320,180" fill="url(#birdGradient1)" />
-                </svg>
-            </div>
-            <h1 class="platform-title">IB HUB</h1>
-            <h2 class="subject-title">IB Chemistry</h2>
-        </div>
-
-        <div class="courses-grid">
-            <div class="course-card" onclick="window.open('https://canvas.instructure.com/courses/12815104', '_blank')">
-                <div class="course-level">Diploma Programme Year 1</div>
-                <div class="course-name">DP1-SL</div>
-                <div class="course-description">
-                    Foundation concepts in chemistry with standard level depth. Perfect for building essential knowledge and skills.
-                </div>
-                <a href="https://canvas.instructure.com/courses/12815104" target="_blank" class="course-button">Start Learning</a>
-            </div>
-
-            <div class="course-card" onclick="window.open('https://canvas.instructure.com/courses/12815060', '_blank')">
-                <div class="course-level">Diploma Programme Year 2</div>
-                <div class="course-name">DP2-SL</div>
-                <div class="course-description">
-                    Advanced standard level chemistry preparing you for IB examinations with comprehensive review and practice.
-                </div>
-                <a href="https://canvas.instructure.com/courses/12815060" target="_blank" class="course-button">Start Learning</a>
-            </div>
-
-            <div class="course-card" onclick="window.open('https://canvas.instructure.com/courses/12815104', '_blank')">
-                <div class="course-level">Diploma Programme Year 1</div>
-                <div class="course-name">DP1-HL</div>
-                <div class="course-description">
-                    Intensive higher level chemistry with deeper theoretical understanding and complex problem-solving.
-                </div>
-                <a href="https://canvas.instructure.com/courses/12815104" target="_blank" class="course-button">Start Learning</a>
-            </div>
-
-            <div class="course-card" onclick="window.open('https://canvas.instructure.com/courses/12815109', '_blank')">
-                <div class="course-level">Diploma Programme Year 2</div>
-                <div class="course-name">DP2-HL</div>
-                <div class="course-description">
-                    Master-level chemistry course with advanced topics, research skills, and exam preparation strategies.
-                </div>
-                <a href="https://canvas.instructure.com/courses/12815109" target="_blank" class="course-button">Start Learning</a>
-            </div>
-        </div>
-
-        <div class="footer-note">
-            <p><strong>Ready to deploy on Netlify for free!</strong></p>
-            <p>Simply drag and drop this HTML file to <a href="https://app.netlify.com/drop" style="color: #4fd1c7;">Netlify Drop</a> or connect your GitHub repository for continuous deployment. Your IB Chemistry courses will be live instantly with HTTPS and global CDN.</p>
-        </div>
-    </div>
-</body>
-</html>
+</script></body></html>
