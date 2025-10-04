@@ -4,7 +4,7 @@
     <title>IB HUB - Chemistry (DP-SL & DP-HL)</title>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="IB HUB | IB Chemistry by Dr. Amro Shetta — DP-SL and DP-HL course hub." name="description" />
+    <meta content="IB HUB | IB Chemistry by Dr. Amro Shetta â€" DP-SL and DP-HL course hub." name="description" />
     <style>
         * {
             margin: 0;
@@ -112,23 +112,16 @@
             letter-spacing: -1.5px;
         }
 
-        .subject-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--white-90);
-            margin-bottom: 2.6rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
-        }
-
         .course-title {
             font-size: 2.4rem;
             font-weight: 800;
-            color: var(--accent-1);
             margin-bottom: 1.2rem;
             text-align: center;
             letter-spacing: 0.5px;
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2), var(--accent-3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .courses-grid {
@@ -177,8 +170,11 @@
         .course-name {
             font-size: 2.1rem;
             font-weight: 800;
-            color: white;
             letter-spacing: 0.5px;
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .back-button {
@@ -272,11 +268,55 @@
             line-height: 1.45;
             font-size: 1rem;
         }
+        
+        .lesson-item.linked {
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .lesson-item.linked:hover {
+            background: rgba(79, 209, 199, 0.25);
+            box-shadow: inset 0 0 0 1px rgba(79, 209, 199, 0.4);
+            text-decoration: none;
+            color: #4fd1c7;
+            border-radius: 8px;
+        }
+        
+        .lesson-item.linked:focus-visible {
+            outline: 2px solid var(--accent-1);
+            outline-offset: 2px;
+            border-radius: 8px;
+        }
+
+        a.lesson-item.linked:active {
+            background: rgba(0, 150, 136, 0.35);
+            color: #00acc1;
+            transform: scale(0.98);
+        }
 
         .lesson-code {
             color: var(--accent-1);
             font-weight: 700;
             margin-right: 0.5rem;
+        }
+
+        .special-lesson-btn {
+            background: linear-gradient(135deg, #fd79a8, #a29bfe);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .special-lesson-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.25);
         }
 
         .contact-info {
@@ -348,7 +388,6 @@
         }
 
         .large-link-btn {
-            flex: 1;
             display: block;
             color: white;
             border-radius: 18px;
@@ -385,25 +424,82 @@
         .large-link-btn:hover::before {
             left: 100%;
         }
-
-        .exam-center-btn {
-            background-image: linear-gradient(135deg, #74b9ff, #764ba2);
+        
+        .single-button-row a {
+            margin: 2rem 0;
         }
 
-        .data-booklet-btn {
-            background-image: linear-gradient(135deg, #43e97b, #38f9d7);
-        }
-
-        .ia-checklist-btn {
-            background-image: linear-gradient(135deg, var(--accent-3), var(--accent-1));
-            margin-top: -0.5rem;
+        .exam-center-btn { background-image: linear-gradient(135deg, var(--accent-3), var(--bg-end)); }
+        .data-booklet-btn { background-image: linear-gradient(135deg, var(--accent-3), var(--accent-2)); }
+        
+        .resource-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
             margin-bottom: 2.2rem;
         }
-
+        .ia-checklist-btn { background-image: linear-gradient(135deg, var(--accent-3), var(--accent-1)); }
+        .past-papers-btn { background-image: linear-gradient(135deg, var(--bg-start), var(--bg-end)); }
+        .textbooks-btn { background-image: linear-gradient(135deg, var(--accent-2), var(--bg-start)); }
+        
         @keyframes pan-gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+        
+        .practice-questions-box, .videos-box {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .practice-questions-title, .videos-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent-1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .practice-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .practice-btn {
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            padding: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            color: var(--white-90);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.25s ease;
+        }
+        
+        .practice-btn:hover {
+            background: rgba(79, 209, 199, 0.25);
+            color: #4fd1c7;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .videos-title { margin-bottom: 1rem; }
+        .coming-soon-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white-90);
+            opacity: 0.7;
+            text-align: center;
         }
 
         .signin-wrap {
@@ -540,6 +636,8 @@
             border-radius: 12px;
             padding: 0.9rem 1rem;
             font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
             cursor: pointer;
             transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
             box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
@@ -555,29 +653,6 @@
             opacity: 0.95;
         }
 
-        a.lesson-item.linked {
-            display: block;
-            color: inherit;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        a.lesson-item.linked:hover {
-            background: rgba(79, 209, 199, 0.25);
-            box-shadow: inset 0 0 0 1px rgba(79, 209, 199, 0.4);
-            text-decoration: none;
-            color: #4fd1c7;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        a.lesson-item.linked:active {
-            background: rgba(0, 150, 136, 0.35);
-            color: #00acc1;
-            transform: scale(0.98);
-        }
-
         @media (max-width: 900px) {
             .signin-wrap {
                 grid-template-columns: 1fr;
@@ -590,7 +665,6 @@
 
         @media (max-width: 768px) {
             .platform-title { font-size: 2.3rem; }
-            .subject-title { font-size: 1.6rem; font-weight: 800; }
             .courses-grid { grid-template-columns: 1fr; gap: 1.2rem; }
             .course-card { padding: 2rem 1.2rem; }
             .lessons-content { padding: 1.6rem; }
@@ -599,6 +673,7 @@
             .logo { width: 340px; height: 340px; }
             .course-logo { width: 280px; height: 280px; }
             .button-row { flex-direction: column; }
+            .practice-buttons-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -622,7 +697,7 @@
                         <label class="form-label" for="username">Username</label>
                         <input autocomplete="username" class="form-input" id="username" name="username" placeholder="your.email@example.com" required type="text" />
                         <label class="form-label" for="password">Password</label>
-                        <input autocomplete="current-password" class="form-input" id="password" name="password" placeholder="••••••••" required type="password" />
+                        <input autocomplete="current-password" class="form-input" id="password" name="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required type="password" />
                         <button aria-label="Sign in" class="primary-btn" id="pwSignIn" type="submit">Sign In</button>
                     </form>
                 </div>
@@ -657,18 +732,20 @@
                         </g>
                     </svg>
                 </div>
-                <h1 class="platform-title">IB HUB</h1>
-                <h2 class="subject-title">IB Chemistry</h2>
             </div>
             <div aria-label="Courses" class="courses-grid" role="navigation">
-                <div aria-label="Open DP-SL" class="course-card" onclick="navigate('dp-sl')" role="link" tabindex="0">
-                    <div class="course-name">DP-SL</div>
+                <div aria-label="Open Chemistry SL" class="course-card" onclick="navigate('dp-sl')" role="link" tabindex="0">
+                    <div class="course-name">Chemistry SL</div>
                 </div>
-                <div aria-label="Open DP-HL" class="course-card" onclick="navigate('dp-hl')" role="link" tabindex="0">
-                    <div class="course-name">DP-HL</div>
+                <div aria-label="Open Chemistry HL" class="course-card" onclick="navigate('dp-hl')" role="link" tabindex="0">
+                    <div class="course-name">Chemistry HL</div>
                 </div>
             </div>
-            <a href="https://drive.google.com/file/d/1WwbuT_cI0pgXNIcDG49qwJT662uo43pv/view?usp=drive_link" class="large-link-btn ia-checklist-btn" target="_blank" rel="noopener">📝 Chemistry IA Checklist</a>
+            <div class="resource-buttons">
+                <a href="https://drive.google.com/file/d/1WwbuT_cI0pgXNIcDG49qwJT662uo43pv/view?usp=drive_link" class="large-link-btn ia-checklist-btn" target="_blank" rel="noopener">📋 Chemistry IA Checklist</a>
+                <a href="#" class="large-link-btn past-papers-btn">📂 Past Papers</a>
+                <a href="#" class="large-link-btn textbooks-btn">📚 Textbooks</a>
+            </div>
             <div aria-label="Instructor contact" class="contact-info">
                 <h3>Course Instructor</h3>
                 <div class="contact-details">
@@ -679,7 +756,7 @@
         </div>
     </section>
 
-    <section aria-label="DP-SL" class="page course-page" id="dp-sl" role="region">
+    <section aria-label="Chemistry SL" class="page course-page" id="dp-sl" role="region">
         <button aria-label="Back to Home" class="back-button" onclick="navigate('main')">← Back to Home</button>
         <button class="logout-button" onclick="logout()">Sign out</button>
         <div class="course-container">
@@ -707,7 +784,7 @@
                         </g>
                     </svg>
                 </div>
-                <h1 class="course-title">DP-SL</h1>
+                <h1 class="course-title">Chemistry SL</h1>
             </div>
             <div class="lessons-content">
                 <div class="section-title">STRUCTURE (S)</div>
@@ -715,7 +792,7 @@
                 <div class="lesson-item"><span class="lesson-code">S1.1</span> - Introduction to the particulate nature of matter</div>
                 <div class="lesson-item"><span class="lesson-code">S1.2</span> - The nuclear atom</div>
                 <div class="lesson-item"><span class="lesson-code">S1.3</span> - Electron configurations</div>
-                <div class="lesson-item"><span class="lesson-code">S1.4 & R2.1</span> – Mole concept and the amount of chemical change</div>
+                <div class="lesson-item"><span class="lesson-code">S1.4 & R2.1</span> â€" Mole concept and the amount of chemical change</div>
                 <div class="lesson-item"><span class="lesson-code">S1.5</span> - Ideal gases</div>
                 <div class="subsection-title">Structure 2 - Models of bonding and structure</div>
                 <div class="lesson-item"><span class="lesson-code">S2.1</span> - The ionic model</div>
@@ -738,6 +815,7 @@
                 <div class="lesson-item"><span class="lesson-code">R3.2</span> - Electron transfer reactions</div>
                 <div class="lesson-item"><span class="lesson-code">R3.3</span> - Electron pair sharing reactions (I)</div>
                 <div class="lesson-item"><span class="lesson-code">R3.4</span> - Electron pair sharing reactions (II)</div>
+                <div class="special-lesson-btn" role="button" tabindex="0">Paper 1B tips and tricks</div>
             </div>
             <div class="button-row">
                 <a href="https://drive.google.com/drive/folders/1YrF3booaghZPA5Taf_KXGOEPpb8kxgJj?usp=drive_link" class="large-link-btn exam-center-btn" target="_blank" rel="noopener">📘 Exam Center</a>
@@ -753,7 +831,7 @@
         </div>
     </section>
 
-    <section aria-label="DP-HL" class="page course-page" id="dp-hl" role="region">
+    <section aria-label="Chemistry HL" class="page course-page" id="dp-hl" role="region">
         <button aria-label="Back to Home" class="back-button" onclick="navigate('main')">← Back to Home</button>
         <button class="logout-button" onclick="logout()">Sign out</button>
         <div class="course-container">
@@ -781,7 +859,7 @@
                         </g>
                     </svg>
                 </div>
-                <h1 class="course-title">DP-HL</h1>
+                <h1 class="course-title">Chemistry HL</h1>
             </div>
             <div class="lessons-content">
                 <div class="section-title">STRUCTURE (S)</div>
@@ -789,7 +867,7 @@
                 <div class="lesson-item"><span class="lesson-code">S1.1</span> - Introduction to the particulate nature of matter</div>
                 <div class="lesson-item"><span class="lesson-code">S1.2</span> - The nuclear atom</div>
                 <div class="lesson-item"><span class="lesson-code">S1.3</span> - Electron configurations</div>
-                <div class="lesson-item"><span class="lesson-code">S1.4 & R2.1</span> – Mole concept and the amount of chemical change</div>
+                <div class="lesson-item"><span class="lesson-code">S1.4 & R2.1</span> â€" Mole concept and the amount of chemical change</div>
                 <div class="lesson-item"><span class="lesson-code">S1.5</span> - Ideal gases</div>
                 <div class="lesson-item"><span class="lesson-code">S1</span> - HL level</div>
                 <div class="subsection-title">Structure 2 - Models of bonding and structure</div>
@@ -822,6 +900,7 @@
                 <div class="lesson-item"><span class="lesson-code">R3.3</span> - Electron pair sharing reactions (I)</div>
                 <div class="lesson-item"><span class="lesson-code">R3.4</span> - Electron pair sharing reactions (II)</div>
                 <div class="lesson-item"><span class="lesson-code">R3.4</span> - HL level</div>
+                <div class="special-lesson-btn" role="button" tabindex="0">Paper 1B tips and tricks</div>
             </div>
             <div class="button-row">
                 <a href="https://drive.google.com/drive/folders/1v5b34PSv6dhTlTZLTVNlNHst0gW_RWCg?usp=drive_link" class="large-link-btn exam-center-btn" target="_blank" rel="noopener">📘 Exam Center</a>
@@ -837,9 +916,49 @@
         </div>
     </section>
 
+    <section aria-label="Lesson Detail" class="page course-page" id="lesson-detail" role="region">
+        <button aria-label="Back to Course" class="back-button" id="backToCourseBtn">← Back to Course</button>
+        <button class="logout-button" onclick="logout()">Sign out</button>
+        <div class="course-container">
+            <div class="logo-section">
+                <div aria-hidden="true" class="course-logo" id="lesson-detail-logo-slot">
+                </div>
+                <h1 class="course-title" id="lesson-detail-title">Lesson Title Placeholder</h1>
+            </div>
+            
+            <div class="single-button-row">
+                 <a href="#" id="study-notes-btn" class="large-link-btn data-booklet-btn" target="_blank" rel="noopener">📝 Study Notes</a>
+            </div>
+
+            <div class="practice-questions-box" id="practice-questions-container" style="display: none;">
+                <h3 class="practice-questions-title">Practice Questions</h3>
+                <div class="practice-buttons-grid" id="practice-buttons-slot">
+                </div>
+            </div>
+
+            <div class="videos-box">
+                <h3 class="videos-title">Videos</h3>
+                <p class="coming-soon-text">Coming Soon...</p>
+            </div>
+
+            <div class="contact-info">
+                <h3>Course Instructor</h3>
+                <div class="contact-details">
+                    <div>Dr. Amro Shetta</div>
+                    <div>WhatsApp: <a class="whatsapp-link" href="https://wa.me/201225051679" rel="noopener" target="_blank">+201225051679</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
-        // --- Core State & Page Management ---
         const AUTH_KEY = 'ibhub_signed_in';
+        let lastCoursePage = 'main';
+
+        const PRACTICE_QUESTIONS = {
+            "S1.1": ["Matter and separation techniques"], "S1.2": ["Atomic structures", "Mass spectrum and isotopes"], "S1.3": ["Hydrogen emission spectrum", "Electronic configuration and orbitals"], "S1.4 & R2.1": ["Moles calculations", "Empirical and molecular formula", "Balancing equations", "Limiting reactants and mole ratio", "Percentage yield", "Percent by mass", "Dilution and atom economy"], "S1.5": ["Ideal gas equation"], "S2.1": ["Ionic bonds"], "S2.2": ["Bond length, strength and coordinate bond", "Lewis structure, bond angle and molecular geometry", "Bond and molecule polarity", "Giant covalent structures", "Intermolecular forces", "Chromatography"], "S2.3": ["Metallic bonds"], "S2.4": ["Bond triangle and addition polymerization"], "S3.1": ["Periodic trends", "Oxidation states"], "S3.2": ["Naming of organic compounds", "Properties of organic compounds", "Isomerism"], "R1.1": ["Endothermic and exothermic", "Calorimetry"], "R1.2": ["Bond enthalpy", "Hess's law"], "R1.3": ["Combustion reactions", "Fossil and biofuels", "Fuel cells"], "R2.2": ["Monitoring and determining rate of reactions", "Factor affecting rate of reactions", "Maxwell Boltzmann curve"], "R2.3": ["Equilibrium constant", "Factors affecting equilibrium position and Kc"], "R3.1": ["Conjugate acid-base pair, amphoteric and amphiprotic", "PH scale and pH and Kw calculations", "Acid and base reactions", "Titration calculations and curves"], "R3.2": ["Redox balancing equations", "Galvanic and Electrolytic cells", "Redox reactions"], "R3.3": ["Free radical substitution reactions", "Alcohol reactions"], "R3.4": ["Alkene reactions"], "S1-HL": ["Successive ionization energies", "Light and energy"], "S2-HL": ["Formal charges", "Sigma, Pi bond and hyperdization", "Resonance and benzene", "HL lewis structure, bond angle and molecular geometry", "Condensation polymerization"], "S3.1-HL": ["Transition metals and complex colors"], "S3.2-HL": ["IR spectroscopy", "Mass Spectrometry", "NMR spectroscopy", "Optical isomerism"], "R1.4-HL": ["Enthalpy of formation", "Enthalpy of combustion", "Born Haber cycle", "Entropy and Gibbs free energy"], "R2.2-HL": ["Rate expression and reaction order", "Arrhenius equation", "Reaction mechanism"], "R2.3-HL": ["Reaction Quotient", "ICE table", "Gibbs free energy and Kc"], "R3.1-HL": ["Lewis acids and bases", "Salt hydrolysis", "PH, Ka and Kb calculations", "Buffer and its calculations"], "R3.2-HL": ["Electrolytic products, electroplating and metal depoisition", "E-cells and Gibbs free energy"], "R3.4-HL": ["SN1 and SN2 reactions", "Electrophilic addition reaction and Markovnikov's rule", "Electrophilic substitution of benzene"],
+            "P1B": ["Paper 1B past papers"]
+        };
 
         function isSignedIn() {
             try { return !!localStorage.getItem(AUTH_KEY); } 
@@ -851,10 +970,40 @@
             const pageToShow = document.getElementById(pageId);
             if (pageToShow) {
                 pageToShow.classList.add('active');
+                window.scrollTo(0, 0);
             }
         }
+        
+        function showLessonDetail(title, studyNotesUrl, lessonCode) {
+            document.getElementById('lesson-detail-title').textContent = title;
+            document.getElementById('study-notes-btn').href = studyNotesUrl;
 
-        // --- Routing Logic ---
+            const practiceContainer = document.getElementById('practice-questions-container');
+            const practiceSlot = document.getElementById('practice-buttons-slot');
+            practiceSlot.innerHTML = '';
+
+            const questions = PRACTICE_QUESTIONS[lessonCode];
+            
+            if (questions && questions.length > 0) {
+                practiceContainer.style.display = 'block';
+                questions.forEach(questionTitle => {
+                    const btn = document.createElement('a');
+                    btn.href = '#';
+                    btn.className = 'practice-btn';
+                    let formattedTitle = questionTitle.trim();
+                    formattedTitle = formattedTitle.charAt(0).toUpperCase() + formattedTitle.slice(1);
+                    btn.textContent = formattedTitle;
+                    btn.target = '_blank';
+                    btn.rel = 'noopener';
+                    practiceSlot.appendChild(btn);
+                });
+            } else {
+                practiceContainer.style.display = 'none';
+            }
+
+            showPage('lesson-detail');
+        }
+
         function handleRouting() {
             if (!isSignedIn()) {
                 showPage('signin');
@@ -868,12 +1017,13 @@
             }
         }
 
-        // --- Authentication & Event Listeners ---
         function initializeApp() {
             const form = document.getElementById('signinForm');
             if (!form) return;
 
-            const allowedCredentials = { "student001@example.com": "St#d001!vX9", "student002@example.com": "St#d002!kT2", "student003@example.com": "St#d003!mR7", "student004@example.com": "St#d004!pQ4", "student005@example.com": "St#d005!aH8", "student006@example.com": "St#d006!zF6", "student007@example.com": "St#d007!wC1", "student008@example.com": "St#d008!tL3", "student009@example.com": "St#d009!bN5", "student010@example.com": "St#d010!cV0", "student011@example.com": "IBuser011$R2", "student012@example.com": "IBuser012$Y7", "student013@example.com": "IBuser013$M4", "student014@example.com": "IBuser014$P8", "student015@example.com": "IBuser015$K9", "student016@example.com": "IBuser016$Q6", "student017@example.com": "IBuser017$L1", "student018@example.com": "IBuser018$Z5", "student019@example.com": "IBuser019$X3", "student020@example.com": "IBuser020$V2", "student021@example.com": "amro_test021#A9", "student022@example.com": "amro_test022#B4", "student023@example.com": "amro_test023#C7", "student024@example.com": "amro_test024#D6", "student025@example.com": "amro_test025#E1", "student026@example.com": "amro_test026#F3", "student027@example.com": "amro_test027#G8", "student028@example.com": "amro_test028#H2", "student029@example.com": "amro_test029#J5", "student030@example.com": "amro_test030#K0", "student031@example.com": "hub031*Zq7", "student032@example.com": "hub032*Wp2", "student033@example.com": "hub033*Ve9", "student034@example.com": "hub034*Tr4", "student035@example.com": "hub035*Sd1", "student036@example.com": "hub036*Fx8", "student037@example.com": "hub037*Gm6", "student038@example.com": "hub038*Bn3", "student039@example.com": "hub039*Pv5", "student040@example.com": "hub040*Lc0", "student041@example.com": "pupil041~R9x", "student042@example.com": "pupil042~T2v", "student043@example.com": "pupil043~Y8b", "student044@example.com": "pupil044~U4n", "student045@example.com": "pupil045~I1m", "student046@example.com": "pupil046~O6k", "student047@example.com": "pupil047~P3j", "student048@example.com": "pupil048~S7h", "student049@example.com": "pupil049~D5g", "student050@example.com": "pupil050~F0e" };
+            const allowedCredentials = { 
+                "student001@example.com": "St#d001!vX9", "student002@example.com": "St#d002!kT2", "student003@example.com": "St#d003!mR7", "student004@example.com": "St#d004!pQ4", "student005@example.com": "St#d005!aH8", "student006@example.com": "St#d006!zF6", "student007@example.com": "St#d007!wC1", "student008@example.com": "St#d008!tL3", "student009@example.com": "St#d009!bN5", "student010@example.com": "St#d010!cV0", "student011@example.com": "St#d011!xM8", "student012@example.com": "St#d012!pR6", "student013@example.com": "St#d013!qW4", "student014@example.com": "St#d014!sE2", "student015@example.com": "St#d015!tY7", "student016@example.com": "St#d016!uI9", "student017@example.com": "St#d017!vO1", "student018@example.com": "St#d018!wP3", "student019@example.com": "St#d019!xA5", "student020@example.com": "St#d020!yS8", "student021@example.com": "IBuser021$R2", "student022@example.com": "IBuser022$Y7", "student023@example.com": "IBuser023$M4", "student024@example.com": "IBuser024$P8", "student025@example.com": "IBuser025$K9", "student026@example.com": "IBuser026$Q6", "student027@example.com": "IBuser027$L1", "student028@example.com": "IBuser028$Z5", "student029@example.com": "IBuser029$X3", "student030@example.com": "IBuser030$V2", "student031@example.com": "IBuser031$B4", "student032@example.com": "IBuser032$N7", "student033@example.com": "IBuser033$C9", "student034@example.com": "IBuser034$D1", "student035@example.com": "IBuser035$F6", "student036@example.com": "IBuser036$G8", "student037@example.com": "IBuser037$H3", "student038@example.com": "IBuser038$J5", "student039@example.com": "IBuser039$K0", "student040@example.com": "IBuser040$L2", "student041@example.com": "amro_test041#A9", "student042@example.com": "amro_test042#B4", "student043@example.com": "amro_test043#C7", "student044@example.com": "amro_test044#D6", "student045@example.com": "amro_test045#E1", "student046@example.com": "amro_test046#F3", "student047@example.com": "amro_test047#G8", "student048@example.com": "amro_test048#H2", "student049@example.com": "amro_test049#J5", "student050@example.com": "amro_test050#K0", "student051@example.com": "amro_test051#L4", "student052@example.com": "amro_test052#M7", "student053@example.com": "amro_test053#N9", "student054@example.com": "amro_test054#P1", "student055@example.com": "amro_test055#Q6", "student056@example.com": "amro_test056#R8", "student057@example.com": "amro_test057#S3", "student058@example.com": "amro_test058#T5", "student059@example.com": "amro_test059#U0", "student060@example.com": "amro_test060#V2", "student061@example.com": "hub061*Zq7", "student062@example.com": "hub062*Wp2", "student063@example.com": "hub063*Ve9", "student064@example.com": "hub064*Tr4", "student065@example.com": "hub065*Sd1", "student066@example.com": "hub066*Fx8", "student067@example.com": "hub067*Gm6", "student068@example.com": "hub068*Bn3", "student069@example.com": "hub069*Pv5", "student070@example.com": "hub070*Lc0", "student071@example.com": "hub071*Kx4", "student072@example.com": "hub072*Jy7", "student073@example.com": "hub073*Hz9", "student074@example.com": "hub074*Gw1", "student075@example.com": "hub075*Fv6", "student076@example.com": "hub076*Et8", "student077@example.com": "hub077*Ds3", "student078@example.com": "hub078*Cr5", "student079@example.com": "hub079*Bq0", "student080@example.com": "hub080*Ap2", "student081@example.com": "pupil081~R9x", "student082@example.com": "pupil082~T2v", "student083@example.com": "pupil083~Y8b", "student084@example.com": "pupil084~U4n", "student085@example.com": "pupil085~I1m", "student086@example.com": "pupil086~O6k", "student087@example.com": "pupil087~P3j", "student088@example.com": "pupil088~S7h", "student089@example.com": "pupil089~D5g", "student090@example.com": "pupil090~F0e", "student091@example.com": "pupil091~A8c", "student092@example.com": "pupil092~Q4w", "student093@example.com": "pupil093~W7r", "student094@example.com": "pupil094~E9t", "student095@example.com": "pupil095~R1y", "student096@example.com": "pupil096~T6u", "student097@example.com": "pupil097~Y2i", "student098@example.com": "pupil098~U8o", "student099@example.com": "pupil099~I4p", "student100@example.com": "pupil100~O0l" 
+            };
 
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
@@ -894,19 +1044,33 @@
             });
 
             const srcLogo = document.querySelector('.logo');
-            const slot = document.getElementById('signin-logo-slot');
-            if (srcLogo && slot) {
-                slot.innerHTML = srcLogo.innerHTML;
+            const signinLogoSlot = document.getElementById('signin-logo-slot');
+            if (srcLogo && signinLogoSlot) {
+                signinLogoSlot.innerHTML = srcLogo.innerHTML;
+            }
+            const courseLogo = document.querySelector('.course-logo');
+            const lessonLogoSlot = document.getElementById('lesson-detail-logo-slot');
+            if (courseLogo && lessonLogoSlot) {
+                lessonLogoSlot.innerHTML = courseLogo.innerHTML;
+            }
+
+            const backBtn = document.getElementById('backToCourseBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', () => showPage(lastCoursePage));
             }
         }
         
-        // --- Global Navigation & Startup ---
-        function navigate(pageId) { window.location.hash = pageId; }
+        function navigate(pageId) {
+            if (pageId === 'dp-sl' || pageId === 'dp-hl') {
+                lastCoursePage = pageId;
+            }
+            window.location.hash = pageId;
+        }
         
         function logout() {
             localStorage.removeItem(AUTH_KEY);
-            sessionStorage.removeItem(AUTH_KEY); // Also clear session storage for good measure
-            location.reload();
+            sessionStorage.removeItem(AUTH_KEY);
+            location.href = location.pathname;
         }
         
         window.addEventListener('load', () => {
@@ -919,39 +1083,36 @@
             attachDriveLinks(); 
         });
 
-        // --- Google Drive Linking ---
         function attachDriveLinks() {
             const DRIVE_LINKS = {
-                // DP-SL & DP-HL Core Links
-                "S1.1": "https://drive.google.com/file/d/13WuG72PBKj4JuGAfFFXz2M04hNmUthIL/view?usp=drive_link",
-                "S1.2": "https://drive.google.com/file/d/1WewTAu-Gm-3R8H4MrCj8SKVEcJjIpcoT/view?usp=drive_link",
-                "S1.3": "https://drive.google.com/file/d/1w0qzNi-uGk3sQ6-HV5xHbiiGlJTjMJ4D/view?usp=drive_link",
-                "S1.4 & R2.1": "https://drive.google.com/file/d/1ffNo31rsiz0rDAJYLJJYT_fxyFw56BL7/view?usp=drive_link",
-                "S1.5": "https://drive.google.com/file/d/1n3wEPhMZ0KowSAF-_O_p2XE8GY1g_FgS/view?usp=drive_link",
-                "S2.1": "https://drive.google.com/file/d/1DklJojJtLmF-GnM0xeiFTHTJDU2SumGi/view?usp=drive_link",
-                "S2.2": "https://drive.google.com/file/d/1ZAVmZjcCuBtqPHy8sd6ipZTLQDNeBHL8/view?usp=drive_link",
-                "S2.3": "https://drive.google.com/file/d/1cHPXVlKy4v0j-zUioXUzDYHkC1Mp30NT/view?usp=drive_link",
-                "S2.4": "https://drive.google.com/file/d/1T6oKjr4i76LhYTU5UiXWuiv2_vNFF-iB/view?usp=drive_link",
-                "S3.1": "https://drive.google.com/file/d/16_bGLO7WUpJVKbmwPYjtZzCdfaoqd1ha/view?usp=drive_link",
-                "S3.2": "https://drive.google.com/file/d/1FZdlOlFKOSIqGNSt8OCi7jXpWPu3IMdR/view?usp=drive_link",
-                "R1.1": "https://drive.google.com/file/d/1dt-AuNVCjNnc3BsT5bBfCrZ8tH1Hpdyu/view?usp=drive_link",
-                "R1.2": "https://drive.google.com/file/d/1Br2hIyg4Sq1ELo6SmtT78DJ2_e1KsFxM/view?usp=drive_link",
-                "R1.3": "https://drive.google.com/file/d/1UdDY4mlTx6GEctqeJDgKaa7W3ff8cy7u/view?usp=drive_link",
-                "R2.2": "https://drive.google.com/file/d/1MUuV8DrRvx4tMr_fJcPkSGagC3YInkF7/view?usp=drive_link",
-                "R2.3": "https://drive.google.com/file/d/13JMoXYEJJ6a-tCItgYplBi4CViRWcwU9/view?usp=drive_link",
-
-                // DP-HL Specific Links
-                "S1-HL": "https://drive.google.com/file/d/1NTg0GEsjLThWGerwCmVOYrOLD6m_McKh/view?usp=drive_link",
-                "S2-HL": "https://drive.google.com/file/d/1qMIKoMkYeEnQRgEc3UL9sU0fYwC5IoNm/view?usp=drive_link",
-                "S3.1-HL": "https://drive.google.com/file/d/1Bo7pq1ANx6uASE3XII4KEHgYmKc1PUJY/view?usp=drive_link",
-                "S3.2-HL": "https://drive.google.com/file/d/1Bo7pq1ANx6uASE3XII4KEHgYmKc1PUJY/view?usp=drive_link",
-                "R1.4-HL": "https://drive.google.com/file/d/1Dm_MfW6KcjgAZOBZWnqxfvagZnyhsN35/view?usp=drive_link",
-                "R2.2-HL": "https://drive.google.com/file/d/1mI-sAoR6FWFMaJQJ0NDD6_0gjT1Jn-_l/view?usp=drive_link",
-                "R2.3-HL": "https://drive.google.com/file/d/1IIAGmeFwiKYinoZl7X-yx4x3Mg5zb_WE/view?usp=drive_link"
+                "S1.1": "https://drive.google.com/file/d/13WuG72PBKj4JuGAfFFXz2M04hNmUthIL/view?usp=drive_link", 
+                "S1.2": "https://drive.google.com/file/d/1WewTAu-Gm-3R8H4MrCj8SKVEcJjIpcoT/view?usp=drive_link", 
+                "S1.3": "https://drive.google.com/file/d/1w0qzNi-uGk3sQ6-HV5xHbiiGlJTjMJ4D/view?usp=drive_link", 
+                "S1.4 & R2.1": "https://drive.google.com/file/d/1ffNo31rsiz0rDAJYLJJYT_fxyFw56BL7/view?usp=drive_link", 
+                "S1.5": "https://drive.google.com/file/d/1n3wEPhMZ0KowSAF-_O_p2XE8GY1g_FgS/view?usp=drive_link", 
+                "S2.1": "https://drive.google.com/file/d/1DklJojJtLmF-GnM0xeiFTHTJDU2SumGi/view?usp=drive_link", 
+                "S2.2": "https://drive.google.com/file/d/1ZAVmZjcCuBtqPHy8sd6ipZTLQDNeBHL8/view?usp=drive_link", 
+                "S2.3": "https://drive.google.com/file/d/1cHPXVlKy4v0j-zUioXUzDYHkC1Mp30NT/view?usp=drive_link", 
+                "S2.4": "https://drive.google.com/file/d/1T6oKjr4i76LhYTU5UiXWuiv2_vNFF-iB/view?usp=drive_link", 
+                "S3.1": "https://drive.google.com/file/d/16_bGLO7WUpJVKbmwPYjtZzCdfaoqd1ha/view?usp=drive_link", 
+                "S3.2": "https://drive.google.com/file/d/1FZdlOlFKOSIqGNSt8OCi7jXpWPu3IMdR/view?usp=drive_link", 
+                "R1.1": "https://drive.google.com/file/d/1dt-AuNVCjNnc3BsT5bBfCrZ8tH1Hpdyu/view?usp=drive_link", 
+                "R1.2": "https://drive.google.com/file/d/1Br2hIyg4Sq1ELo6SmtT78DJ2_e1KsFxM/view?usp=drive_link", 
+                "R1.3": "https://drive.google.com/file/d/1UdDY4mlTx6GEctqeJDgKaa7W3ff8cy7u/view?usp=drive_link", 
+                "R2.2": "https://drive.google.com/file/d/1MUuV8DrRvx4tMr_fJcPkSGagC3YInkF7/view?usp=drive_link", 
+                "R2.3": "https://drive.google.com/file/d/13JMoXYEJJ6a-tCItgYplBi4CViRWcwU9/view?usp=drive_link", 
+                "S1-HL": "https://drive.google.com/file/d/1NTg0GEsjLThWGerwCmVOYrOLD6m_McKh/view?usp=drive_link", 
+                "S2-HL": "https://drive.google.com/file/d/1qMIKoMkYeEnQRgEc3UL9sU0fYwC5IoNm/view?usp=drive_link", 
+                "S3.1-HL": "https://drive.google.com/file/d/1Bo7pq1ANx6uASE3XII4KEHgYmKc1PUJY/view?usp=drive_link", 
+                "S3.2-HL": "https://drive.google.com/file/d/1Bo7pq1ANx6uASE3XII4KEHgYmKc1PUJY/view?usp=drive_link", 
+                "R1.4-HL": "https://drive.google.com/file/d/1Dm_MfW6KcjgAZOBZWnqxfvagZnyhsN35/view?usp=drive_link", 
+                "R2.2-HL": "https://drive.google.com/file/d/1mI-sAoR6FWFMaJQJ0NDD6_0gjT1Jn-_l/view?usp=drive_link", 
+                "R2.3-HL": "https://drive.google.com/file/d/1IIAGmeFwiKYinoZl7X-yx4x3Mg5zb_WE/view?usp=drive_link",
+                "R3.1": "#", "R3.2": "#", "R3.3": "#", "R3.4": "#", "R3.1-HL": "#", "R3.2-HL": "#", "R3.4-HL": "#", "P1B": "#"
             };
 
             document.querySelectorAll('.lessons-content .lesson-item').forEach(item => {
-                if (item.tagName === 'A') return; 
+                if (item.dataset.processed) return;
                 
                 const codeEl = item.querySelector('.lesson-code');
                 if (!codeEl) return;
@@ -961,19 +1122,44 @@
                 const isHL = page && page.id === 'dp-hl';
 
                 if (isHL && /HL level/i.test(item.textContent)) {
-                   key = key.split(' ')[0] + "-HL";
+                   const baseKey = key.match(/^[SR][0-9](\.[0-9])?/)[0];
+                   key = baseKey + "-HL";
                 }
                 
                 const url = DRIVE_LINKS[key];
                 
                 if (url) {
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.target = "_blank";
-                    a.rel = "noopener";
-                    a.className = "lesson-item linked";
-                    a.innerHTML = item.innerHTML;
-                    item.replaceWith(a);
+                    item.dataset.processed = 'true';
+                    const title = item.textContent.trim();
+                    item.classList.add('linked');
+                    item.setAttribute('role', 'button');
+                    item.setAttribute('tabindex', '0');
+                    item.addEventListener('click', () => showLessonDetail(title, url, key));
+                    item.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            showLessonDetail(title, url, key);
+                        }
+                    });
+                }
+            });
+
+            document.querySelectorAll('.special-lesson-btn').forEach(item => {
+                if (item.dataset.processed) return;
+                item.dataset.processed = 'true';
+
+                const key = "P1B";
+                const title = "Paper 1B tips and tricks";
+                const url = DRIVE_LINKS[key];
+
+                if (url) {
+                    item.addEventListener('click', () => showLessonDetail(title, url, key));
+                    item.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            showLessonDetail(title, url, key);
+                        }
+                    });
                 }
             });
         }
